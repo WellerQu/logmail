@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;DEBUG_UI</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -57,10 +57,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="UserDefault.cs" />
-    <Compile Include="ViewModel.cs" />
-    <Compile Include="VMMainWindow.cs" />
-    <Compile Include="VMWarningWindow.cs" />
+    <Compile Include="Command\CommandBase.cs" />
+    <Compile Include="Command\DeleteLogCommand.cs" />
+    <Compile Include="Command\LoadLogCommand.cs" />
+    <Compile Include="Command\SaveLogCommand.cs" />
+    <Compile Include="Converter\DateTimeToStringConverter.cs" />
+    <Compile Include="Converter\DateToShortStringConverter.cs" />
+    <Compile Include="Preference\UserDefault.cs" />
+    <Compile Include="VM\ViewModel.cs" />
+    <Compile Include="VM\VMAboutPanel.cs" />
+    <Compile Include="VM\VMMainWindow.cs" />
+    <Compile Include="VM\VMNewPanel.cs" />
+    <Compile Include="VM\VMSettingPanel.cs" />
+    <Compile Include="VM\VMWarningWindow.cs" />
     <Compile Include="WarningWindow.xaml.cs">
       <DependentUpon>WarningWindow.xaml</DependentUpon>
     </Compile>
@@ -98,7 +107,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -118,6 +127,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

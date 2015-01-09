@@ -1,6 +1,4 @@
-﻿//#define DEBUG_FirstUsing
-
-#if DEBUG
+﻿#if DEBUG
 using System.Diagnostics;
 #endif
 
@@ -19,6 +17,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LogMailApp.Preference;
 
 namespace LogMailApp
 {
@@ -72,10 +71,11 @@ namespace LogMailApp
             else
                 btnStart = this.btnNew;
 
-            this.FunctionButton_PreviewMouseLeftButtonDown(btnStart, null);
+            this.TabButton_PreviewMouseLeftButtonDown(btnStart, null);
         }
 
         private readonly Duration durationGlobal = new Duration(TimeSpan.FromMilliseconds(300));
+        private int lastTag = 0;
 
         private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -105,29 +105,38 @@ namespace LogMailApp
             App.Current.Shutdown(0);
         }
 
-        private void FunctionButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void TabButton_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Button btn = sender as Button;
             int tag = Convert.ToInt16(btn.Tag);
-
-            ThicknessAnimation toMove = new ThicknessAnimation();
-            toMove.To = new Thickness(0, tag, 0, 0);
-            toMove.Duration = durationGlobal;
-
-            this.FocusBackgroundPanel.BeginAnimation(Border.MarginProperty, toMove);
-
-            if (tag == 0)
+            if (tag != lastTag)
             {
-                this.HidePanel(this.SettingPanel, this.durationGlobal);
-                this.ShowPanel(this.EditorPanel, this.durationGlobal);
-            }
-            else if (tag == 40)
-            {
-                this.HidePanel(this.EditorPanel, this.durationGlobal);
-                this.ShowPanel(this.SettingPanel, this.durationGlobal);
-            }
-            else if (tag == 80)
-            {
+                lastTag = tag;
+
+                ThicknessAnimation toMove = new ThicknessAnimation();
+                toMove.To = new Thickness(0, tag, 0, 0);
+                toMove.Duration = durationGlobal;
+
+                this.FocusBackgroundPanel.BeginAnimation(Border.MarginProperty, toMove);
+
+                if (tag == 0)
+                {
+                    this.ShowButton(this.btnDelete, this.durationGlobal);
+
+                    this.HidePanel(this.SettingPanel, this.durationGlobal);
+                    this.ShowPanel(this.EditorPanel, this.durationGlobal);
+                }
+                else if (tag == 40)
+                {
+                    this.HideButton(this.btnDelete, this.durationGlobal);
+
+                    this.HidePanel(this.EditorPanel, this.durationGlobal);
+                    this.ShowPanel(this.SettingPanel, this.durationGlobal);
+                }
+                else if (tag == 80)
+                {
+                    this.HideButton(this.btnDelete, this.durationGlobal);
+                }
             }
         }
 
@@ -154,6 +163,13 @@ namespace LogMailApp
                 }
 
                 t.BeginAnimation(TextBlock.MarginProperty, animation);
+            }
+
+            VM.VMNewPanel VMNewPanel = this.DataContext as VM.VMNewPanel;
+            if (VMNewPanel != null)
+            {
+                VMNewPanel.SelectedDate = Convert.ToDateTime(txt.Tag);
+
             }
 
             this.SaveData();
@@ -248,10 +264,20 @@ namespace LogMailApp
             if (this.txtLogContent.CanUndo)
             {
                 // 保存数据吧
+                VM.VMNewPanel VMNewPanel = this.DataContext as VM.VMNewPanel;
+                if (null != VMNewPanel && VMNewPanel.Save != null && VMNewPanel.Save.CanExecute(null))
+                    VMNewPanel.Save.Execute(null);
             }
 
             this.btnSave.Focus();
         }
         #endregion
+
+        private void btnDelete_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            VM.VMNewPanel VMNewPanel = this.DataContext as VM.VMNewPanel;
+            if (null != VMNewPanel && VMNewPanel.Delete != null && VMNewPanel.Delete.CanExecute(null))
+                VMNewPanel.Delete.Execute(null);
+        }
     }
 }

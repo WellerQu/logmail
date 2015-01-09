@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace LogMailApp
+namespace LogMailApp.Preference
 {
     /// <summary>
     /// 用户首选项
@@ -22,7 +22,7 @@ namespace LogMailApp
             if (null == Instance.PreferenceDoc)
                 Instance.PreferenceDoc = new XmlDocument();
 
-            Instance.PreferenceDoc.Load(PREFERENCEXML_NAME);
+            Instance.PreferenceDoc.Load(Path.Combine(Environment.CurrentDirectory, PREFERENCEXML_NAME));
         }
 
         protected UserDefault()
@@ -40,6 +40,7 @@ namespace LogMailApp
         private const string REPORT_NODE_PATH = "preference/report";
         private const string DIRECTORY_NODE_PATH = "preference/directory";
         private const string README_NODE_PATH = "preference/readme";
+        private const string EMPTY_NODE_PATH = "preference/empty";
         #endregion
 
         private XmlDocument PreferenceDoc = null;
@@ -48,7 +49,7 @@ namespace LogMailApp
         public bool IsFirstUsing
         {
             get
-           {
+            {
                 return bool.Parse(this.PreferenceDoc.SelectSingleNode(ISFIRSTUSING_NODE_PATH).InnerText);
             }
             set
@@ -125,6 +126,22 @@ namespace LogMailApp
             set
             {
                 this.PreferenceDoc.SelectSingleNode(DIRECTORY_NODE_PATH).InnerText = value;
+                this.Save();
+            }
+        }
+
+        /// <summary>
+        /// 获取或设置当日志内容为空时, 将要发送的默认内容
+        /// </summary>
+        public string DefaultEmpty
+        {
+            get
+            {
+                return this.PreferenceDoc.SelectSingleNode(EMPTY_NODE_PATH).InnerText;
+            }
+            set
+            {
+                this.PreferenceDoc.SelectSingleNode(EMPTY_NODE_PATH).InnerText = value;
                 this.Save();
             }
         }

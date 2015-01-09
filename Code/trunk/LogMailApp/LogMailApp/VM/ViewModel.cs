@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LogMailApp
 {
-    public class ViewModel : INotifyPropertyChanged
+    class ViewModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged 成员
 

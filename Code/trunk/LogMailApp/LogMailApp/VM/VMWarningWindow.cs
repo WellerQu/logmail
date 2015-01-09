@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogMailApp.VM
 {
-    public class VMWarningWindow : ViewModel
+    class VMWarningWindow : ViewModel
     {
         private string _Text;
         public string Text

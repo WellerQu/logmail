@@ -10,10 +10,14 @@
   <with></with>
   <!-- 每天什么时候发送? -->
   <when>17:50</when>
+  <!-- 如果内容为空, 这发送以下字符串作为当天日志内容 -->
+  <empty>Hello World</empty>
   <!-- 是否提示发送周报 -->
   <report>true</report>
   <!-- 存放日志的目录 -->
   <directory>MyLogs</directory>
   <!-- Readme.md文件的物理路径 -->
   <readme>README.md</readme>
+  <!-- Welcome -->
+  <welcome>Welcome to use Log Mail *^_^*</welcome>
 </preference>
