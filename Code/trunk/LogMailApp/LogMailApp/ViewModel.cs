@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LogMailApp
 {
-    class ViewModel : INotifyPropertyChanged
+    public class ViewModel : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged 成员
 
@@ -15,7 +15,7 @@ namespace LogMailApp
 
         #endregion
 
-        protected void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChangedEventHandler handler = this.PropertyChanged;
             if (null != handler)

@@ -25,6 +25,7 @@ namespace LogMailApp
         {
             InitializeComponent();
 
+            #region 窗口动画
             double heigth = SystemParameters.PrimaryScreenHeight;
             double width = SystemParameters.PrimaryScreenWidth;
 
@@ -51,9 +52,9 @@ namespace LogMailApp
             sb.Children.Add(toOpacity);
 
             this.BeginStoryboard(sb);
+            #endregion
 
-            this.VMWarningWindow = this.Resources["VMWarningWindowDataSource"] as VMWarningWindow;
-            //this.VMWarningWindow.Text = "Here is Warning";
+            this.WarningText = "Here is warning text";
         }
 
         public WarningWindow(string text)
@@ -62,13 +63,11 @@ namespace LogMailApp
             this.WarningText = text;
         }
 
-        private VMWarningWindow VMWarningWindow = null;
-
         public string WarningText
         {
             set
             {
-                this.VMWarningWindow.Text = value;
+                (this.DataContext as VMWarningWindow).Text = value;
             }
         }
 

@@ -39,6 +39,7 @@ namespace LogMailApp
         private const string WHEN_NODE_PATH = "preference/when";
         private const string REPORT_NODE_PATH = "preference/report";
         private const string DIRECTORY_NODE_PATH = "preference/directory";
+        private const string README_NODE_PATH = "preference/readme";
         #endregion
 
         private XmlDocument PreferenceDoc = null;
@@ -48,11 +49,11 @@ namespace LogMailApp
         {
             get
            {
-                return bool.Parse(Instance.PreferenceDoc.SelectSingleNode(ISFIRSTUSING_NODE_PATH).InnerText);
+                return bool.Parse(this.PreferenceDoc.SelectSingleNode(ISFIRSTUSING_NODE_PATH).InnerText);
             }
             set
             {
-                Instance.PreferenceDoc.SelectSingleNode(ISFIRSTUSING_NODE_PATH).InnerText = value.ToString();
+                this.PreferenceDoc.SelectSingleNode(ISFIRSTUSING_NODE_PATH).InnerText = value.ToString();
                 this.Save();
             }
         }
@@ -61,11 +62,11 @@ namespace LogMailApp
         {
             get
             {
-                return Instance.PreferenceDoc.SelectSingleNode(EMAIL_NODE_PATH).InnerText;
+                return this.PreferenceDoc.SelectSingleNode(EMAIL_NODE_PATH).InnerText;
             }
             set
             {
-                Instance.PreferenceDoc.SelectSingleNode(EMAIL_NODE_PATH).InnerText = value;
+                this.PreferenceDoc.SelectSingleNode(EMAIL_NODE_PATH).InnerText = value;
                 this.Save();
             }
         }
@@ -74,11 +75,11 @@ namespace LogMailApp
         {
             get
             {
-                return Instance.PreferenceDoc.SelectSingleNode(TO_NODE_PATH).InnerText;
+                return this.PreferenceDoc.SelectSingleNode(TO_NODE_PATH).InnerText;
             }
             set
             {
-                Instance.PreferenceDoc.SelectSingleNode(TO_NODE_PATH).InnerText = value;
+                this.PreferenceDoc.SelectSingleNode(TO_NODE_PATH).InnerText = value;
                 this.Save();
             }
         }
@@ -87,38 +88,58 @@ namespace LogMailApp
         {
             get
             {
-                return Instance.PreferenceDoc.SelectSingleNode(WITH_NODE_PATH).InnerText;
+                return this.PreferenceDoc.SelectSingleNode(WITH_NODE_PATH).InnerText;
             }
             set
             {
-                Instance.PreferenceDoc.SelectSingleNode(WITH_NODE_PATH).InnerText = value;
+                this.PreferenceDoc.SelectSingleNode(WITH_NODE_PATH).InnerText = value;
                 this.Save();
             }
         }
 
+        /// <summary>
+        /// 获取或设置是否生成周报内容
+        /// </summary>
         public bool NeedReport
         {
             get
             {
-                return bool.Parse(Instance.PreferenceDoc.SelectSingleNode(REPORT_NODE_PATH).InnerText);
+                return bool.Parse(this.PreferenceDoc.SelectSingleNode(REPORT_NODE_PATH).InnerText);
             }
             set
             {
-                Instance.PreferenceDoc.SelectSingleNode(REPORT_NODE_PATH).InnerText = value.ToString();
+                this.PreferenceDoc.SelectSingleNode(REPORT_NODE_PATH).InnerText = value.ToString();
                 this.Save();
             }
         }
 
+        /// <summary>
+        /// 获取或设置存放日志文档的目录
+        /// </summary>
         public string DirectoryPath
         {
             get
             {
-                return Instance.PreferenceDoc.SelectSingleNode(DIRECTORY_NODE_PATH).InnerText;
+                return this.PreferenceDoc.SelectSingleNode(DIRECTORY_NODE_PATH).InnerText;
             }
             set
             {
-                Instance.PreferenceDoc.SelectSingleNode(DIRECTORY_NODE_PATH).InnerText = value;
+                this.PreferenceDoc.SelectSingleNode(DIRECTORY_NODE_PATH).InnerText = value;
                 this.Save();
+            }
+        }
+
+        /// <summary>
+        /// 获取README.md文件的内容
+        /// </summary>
+        public string[] Readme
+        {
+            get
+            {
+                string path = this.PreferenceDoc.SelectSingleNode(README_NODE_PATH).InnerText;
+                string[] content = File.ReadAllLines(path, Encoding.UTF8);
+
+                return content;
             }
         }
 

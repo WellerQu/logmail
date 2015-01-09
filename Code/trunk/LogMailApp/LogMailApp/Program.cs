@@ -13,19 +13,16 @@ namespace LogMailApp
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         static void Main(string[] args)
         {
-            //UserDefault userDefault = UserDefault.Instance;
+            UserDefault userDefault = UserDefault.Instance;
 
             //if (!userDefault.IsFirstUsing && new Cmd(args).ToBeContinued)
             //{
             App app = new App();
 
-            app.StartupUri = new System.Uri("MainWindow.xaml", System.UriKind.Relative);
-            app.MainWindow = new MainWindow();
-
-            //app.StartupUri = new System.Uri("WarningWindow.xaml", System.UriKind.Relative);
+            app.MainWindow = new MainWindow(userDefault.IsFirstUsing);
             //app.MainWindow = new WarningWindow("Hello World");
 
-            
+            app.MainWindow.Show();
 
             app.Run();
             //}

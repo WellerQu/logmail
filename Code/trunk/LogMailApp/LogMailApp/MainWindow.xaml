@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="LogMailApp.MainWindow"
         Title="MainWindow" Height="420" Width="580" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Closed="Window_Closed" Closing="Window_Closing">
-    <Grid Background="#FFEEEEEE">
+    <Grid Background="#FFEEEEEE" d:IsLocked="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
@@ -12,25 +12,25 @@
             <ColumnDefinition Width="155"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Margin="0" Background="#FF333333" PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown" Grid.RowSpan="2">
+        <Grid Margin="0" Background="#FF333333" PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown" Grid.RowSpan="2" d:IsLocked="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="51"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Left" Margin="10,9,0,9" VerticalAlignment="Top" CornerRadius="50" Background="White">
-                <Image HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="33"/>
+            <Border BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Left" Margin="10,9,0,9" VerticalAlignment="Top" CornerRadius="50" Background="White" d:IsLocked="True">
+                <Image HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="33" d:IsLocked="True"/>
             </Border>
-            <Label Content="Log Mail" HorizontalAlignment="Right" Margin="0,0,9,0" VerticalAlignment="Center" Foreground="White" FontSize="20" FontFamily="MS PGothic" SnapsToDevicePixels="True"/>
-            <Border x:Name="FocusBackgroundPanel" Grid.Row="1" VerticalAlignment="Top" Margin="0" BorderBrush="Black">
-                <Grid Width="155" Height="40" Background="#FF666666">
+            <Label Content="Log Mail" HorizontalAlignment="Right" Margin="0,0,9,0" VerticalAlignment="Center" Foreground="White" FontSize="20" FontFamily="MS PGothic" SnapsToDevicePixels="True" d:IsLocked="True"/>
+            <Border x:Name="FocusBackgroundPanel" Grid.Row="1" VerticalAlignment="Top" Margin="0" BorderBrush="Black" d:IsLocked="True">
+                <Grid Width="155" Height="40" Background="#FF666666" d:IsLocked="True">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="8"/>
                     </Grid.ColumnDefinitions>
-                    <Path Grid.Column="1" Data="M8,14 L0,20 L8,26 Z" Fill="#FFEEEEEE" />
+                    <Path Grid.Column="1" Data="M8,14 L0,20 L8,26 Z" Fill="#FFEEEEEE" d:IsLocked="True" />
                 </Grid>
             </Border>
-            <Grid Margin="0" Grid.Row="1" >
+            <Grid Margin="0" Grid.Row="1" d:IsLocked="True" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
@@ -38,7 +38,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="btnNew" PreviewMouseLeftButtonDown="FunctionButton_PreviewMouseLeftButtonDown" Tag="0">
+                <Button x:Name="btnNew" PreviewMouseLeftButtonDown="FunctionButton_PreviewMouseLeftButtonDown" Tag="0" d:IsLocked="True">
                     <Button.Template>
                         <ControlTemplate>
                             <Grid>
@@ -52,7 +52,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button x:Name="btnSetting" Grid.Row="1" PreviewMouseLeftButtonDown="FunctionButton_PreviewMouseLeftButtonDown" Tag="40">
+                <Button x:Name="btnSetting" Grid.Row="1" PreviewMouseLeftButtonDown="FunctionButton_PreviewMouseLeftButtonDown" Tag="40" d:IsLocked="True">
                     <Button.Template>
                         <ControlTemplate>
                             <Grid>
@@ -66,7 +66,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button x:Name="btnAbout" Grid.Row="2" PreviewMouseLeftButtonDown="FunctionButton_PreviewMouseLeftButtonDown" Tag="80">
+                <Button x:Name="btnAbout" Grid.Row="2" PreviewMouseLeftButtonDown="FunctionButton_PreviewMouseLeftButtonDown" Tag="80" d:IsLocked="True">
                     <Button.Template>
                         <ControlTemplate>
                             <Grid>
@@ -80,7 +80,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button x:Name="btnDelete" Grid.Row="4">
+                <Button x:Name="btnDelete" Grid.Row="4" d:IsLocked="True">
                     <Button.Template>
                         <ControlTemplate>
                             <Border Background="#FFCF2A27">
@@ -91,7 +91,7 @@
                 </Button>
             </Grid>
         </Grid>
-        <Grid x:Name="EditorPanel" Grid.Column="1" Grid.RowSpan="2">
+        <Grid x:Name="EditorPanel" Grid.Column="1" Grid.RowSpan="2" Margin="0" d:IsLocked="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="40"/>
@@ -100,8 +100,8 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="115"/>
             </Grid.ColumnDefinitions>
-            <TextBox Margin="40,40,40,20" BorderThickness="0" Background="#FFEEEEEE" SelectionBrush="#FFB2B2B2"/>
-            <Button x:Name="btnSave" Grid.Row="1" >
+            <TextBox x:Name="txtLogContent" Margin="40,40,40,20" BorderThickness="0" Background="#FFEEEEEE" SelectionBrush="#FFB2B2B2" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" GotFocus="TextBox_LogContent_GotFocus" LostFocus="TextBox_LogContent_LostFocus" Text="Hello Log Mail!" d:IsLocked="True"/>
+            <Button x:Name="btnSave" Grid.Row="1" Visibility="Hidden" d:IsLocked="True" >
                 <Button.Template>
                     <ControlTemplate>
                         <Border>
@@ -118,28 +118,28 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Grid Grid.Column="1" Grid.RowSpan="2" Background="#FFDDDDDD">
-                <StackPanel x:Name="DatePicker" VerticalAlignment="Center">
-                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,20" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" FontSize="22" />
-                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" />
-                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" />
-                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" />
-                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" />
-                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" />
-                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" />
+            <Grid Grid.Column="1" Grid.RowSpan="2" Background="#FFDDDDDD" d:IsLocked="True">
+                <StackPanel x:Name="DatePicker" VerticalAlignment="Center" d:IsLocked="True">
+                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,20" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" FontSize="22" d:IsLocked="True" />
+                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" d:IsLocked="True" />
+                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" d:IsLocked="True" />
+                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" d:IsLocked="True" />
+                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" d:IsLocked="True" />
+                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" d:IsLocked="True" />
+                    <TextBlock VerticalAlignment="Center" Text="Today" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" d:IsLocked="True" />
                 </StackPanel>
             </Grid>
         </Grid>
-        <Grid x:Name="SettingPanel" Grid.Column="1" Grid.RowSpan="2">
-            <Label Content="E-Mail" HorizontalAlignment="Left" Margin="47,60,0,0" VerticalAlignment="Top"/>
-            <Label Content="To" HorizontalAlignment="Left" Margin="69,90,0,0" VerticalAlignment="Top"/>
-            <Label Content="With" HorizontalAlignment="Left" Margin="57,120,0,0" VerticalAlignment="Top"/>
-            <Label Content="When" HorizontalAlignment="Left" Margin="50,150,0,0" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="118,64,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="230" BorderThickness="0" Background="#FFEEEEEE" MouseEnter="TextBox_Setting_MouseEnter" MouseLeave="TextBox_Setting_MouseLeave"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="118,94,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="230" BorderThickness="0" Background="#FFEEEEEE" MouseEnter="TextBox_Setting_MouseEnter" MouseLeave="TextBox_Setting_MouseLeave"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="118,124,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="230" BorderThickness="0" Background="#FFEEEEEE" MouseEnter="TextBox_Setting_MouseEnter" MouseLeave="TextBox_Setting_MouseLeave"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="118,154,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="230" BorderThickness="0" Background="#FFEEEEEE" MouseEnter="TextBox_Setting_MouseEnter" MouseLeave="TextBox_Setting_MouseLeave"/>
+        <Grid x:Name="SettingPanel" Grid.Column="1" Grid.RowSpan="2" Margin="0" d:IsLocked="True">
+            <Label Content="E-Mail" HorizontalAlignment="Left" Margin="47,60,0,0" VerticalAlignment="Top" d:IsLocked="True"/>
+            <Label Content="To" HorizontalAlignment="Left" Margin="69,90,0,0" VerticalAlignment="Top" d:IsLocked="True"/>
+            <Label Content="With" HorizontalAlignment="Left" Margin="57,120,0,0" VerticalAlignment="Top" d:IsLocked="True"/>
+            <Label Content="When" HorizontalAlignment="Left" Margin="50,150,0,0" VerticalAlignment="Top" d:IsLocked="True"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="118,64,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="230" BorderThickness="0" Background="#FFEEEEEE" MouseEnter="TextBox_Setting_MouseEnter" MouseLeave="TextBox_Setting_MouseLeave" d:IsLocked="True"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="118,94,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="230" BorderThickness="0" Background="#FFEEEEEE" MouseEnter="TextBox_Setting_MouseEnter" MouseLeave="TextBox_Setting_MouseLeave" d:IsLocked="True"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="118,124,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="230" BorderThickness="0" Background="#FFEEEEEE" MouseEnter="TextBox_Setting_MouseEnter" MouseLeave="TextBox_Setting_MouseLeave" d:IsLocked="True"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="118,154,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="230" BorderThickness="0" Background="#FFEEEEEE" MouseEnter="TextBox_Setting_MouseEnter" MouseLeave="TextBox_Setting_MouseLeave" d:IsLocked="True"/>
         </Grid>
-        <Image Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Right" PreviewMouseLeftButtonDown="Image_Close_PreviewMouseLeftButtonDown"></Image>
+        <Image Grid.Column="1" Width="25" Height="25" HorizontalAlignment="Right" PreviewMouseLeftButtonDown="Image_Close_PreviewMouseLeftButtonDown" d:IsLocked="True"></Image>
     </Grid>
 </Window>

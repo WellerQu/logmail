@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <preference>
   <!-- 首次使用 -->
-  <isFirstUsing>true</isFirstUsing>
+  <isFirstUsing>True</isFirstUsing>
   <!-- 发送邮件的Email -->
   <email></email>
   <!-- 接收邮件的Email -->
@@ -14,4 +14,6 @@
   <report>true</report>
   <!-- 存放日志的目录 -->
   <directory>MyLogs</directory>
+  <!-- Readme.md文件的物理路径 -->
+  <readme>README.md</readme>
 </preference>
