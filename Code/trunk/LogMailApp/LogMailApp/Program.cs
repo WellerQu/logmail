@@ -8,18 +8,27 @@ namespace LogMailApp
 {
     static class Program
     {
-        [STAThread]
+        [System.STAThreadAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         static void Main(string[] args)
         {
-            // 得到 -ui 命令才打开可视窗口
-            App app = new App();
-            app.InitializeComponent();
-            app.MainWindow = new MainWindow();
-            app.Run();
+            //UserDefault userDefault = UserDefault.Instance;
 
-            // 否则执行cmd
-            Cmd cmd = new Cmd();
-            cmd.Execute();
+            //if (!userDefault.IsFirstUsing && new Cmd(args).ToBeContinued)
+            //{
+            App app = new App();
+
+            app.StartupUri = new System.Uri("MainWindow.xaml", System.UriKind.Relative);
+            app.MainWindow = new MainWindow();
+
+            //app.StartupUri = new System.Uri("WarningWindow.xaml", System.UriKind.Relative);
+            //app.MainWindow = new WarningWindow("Hello World");
+
+            
+
+            app.Run();
+            //}
         }
     }
 }

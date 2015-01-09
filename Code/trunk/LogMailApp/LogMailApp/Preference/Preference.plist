@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<preference>
+  <!-- 首次使用 -->
+  <isFirstUsing>true</isFirstUsing>
+  <!-- 发送邮件的Email -->
+  <email></email>
+  <!-- 接收邮件的Email -->
+  <to></to>
+  <!-- 抄送到的Email -->
+  <with></with>
+  <!-- 每天什么时候发送? -->
+  <when>17:50</when>
+  <!-- 是否提示发送周报 -->
+  <report>true</report>
+  <!-- 存放日志的目录 -->
+  <directory>MyLogs</directory>
+</preference>
