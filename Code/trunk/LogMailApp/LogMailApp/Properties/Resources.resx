@@ -135,7 +135,7 @@
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome to use Log Mail App ^_^</value>
-    <comment>日志内容为空时出现</comment>
+    <comment>日志内容为空时出现的替代文本</comment>
   </data>
   <data name="Yesterday" xml:space="preserve">
     <value>Yesterday</value>

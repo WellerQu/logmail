@@ -87,7 +87,7 @@ namespace LogMailApp
         }
 
         private readonly Duration durationGlobal = new Duration(TimeSpan.FromMilliseconds(200));
-        private int lastTag = 0;    // Tab 按钮的标记
+        private int lastTag = -1;    // Tab 按钮的标记
         private Dictionary<string, TextBlock> datePointerDic = new Dictionary<string, TextBlock>();
 
         private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -110,7 +110,7 @@ namespace LogMailApp
             UserDefault userDefault = UserDefault.Instance;
             if (userDefault.IsFirstUsing)
             {
-#if DEBUG_FirstUsing
+#if !DEBUG_FirstUsing
                 userDefault.IsFirstUsing = false;
 #endif
             }
