@@ -4,15 +4,17 @@
   <isFirstUsing>False</isFirstUsing>
   <!-- 发送邮件的Email -->
   <email></email>
+  <!-- 登录密码 -->
+  <password></password>
   <!-- 接收邮件的Email -->
   <to></to>
   <!-- 抄送到的Email -->
   <with></with>
-  <!-- 每天什么时候发送? -->
+  <!-- 每天什么时候发送? 暂时不使用 -->
   <when>17:50</when>
   <!-- 如果内容为空, 这发送以下字符串作为当天日志内容 -->
   <empty>Hello World</empty>
-  <!-- 是否提示发送周报 -->
+  <!-- 是否提示发送周报 暂时不使用 -->
   <report>true</report>
   <!-- 存放日志的目录 -->
   <directory>MyLogs</directory>

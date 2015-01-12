@@ -70,11 +70,47 @@ namespace LogMailApp.Properties {
         }
         
         /// <summary>
+        ///   查找类似 FileDirectory 的本地化字符串。
+        /// </summary>
+        public static string DirTitleText {
+            get {
+                return ResourceManager.GetString("DirTitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Email 的本地化字符串。
+        /// </summary>
+        public static string EmailTitleText {
+            get {
+                return ResourceManager.GetString("EmailTitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 DefaultEmpty 的本地化字符串。
+        /// </summary>
+        public static string EmptyTitleText {
+            get {
+                return ResourceManager.GetString("EmptyTitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 New 的本地化字符串。
         /// </summary>
         public static string NewButtonText {
             get {
                 return ResourceManager.GetString("NewButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Password 的本地化字符串。
+        /// </summary>
+        public static string PasswordTitleText {
+            get {
+                return ResourceManager.GetString("PasswordTitleText", resourceCulture);
             }
         }
         
@@ -90,27 +126,45 @@ namespace LogMailApp.Properties {
         /// <summary>
         ///   查找类似 Today 的本地化字符串。
         /// </summary>
-        public static string Today {
+        public static string TodayText {
             get {
-                return ResourceManager.GetString("Today", resourceCulture);
+                return ResourceManager.GetString("TodayText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 To 的本地化字符串。
+        /// </summary>
+        public static string ToTitleText {
+            get {
+                return ResourceManager.GetString("ToTitleText", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Welcome to use Log Mail App ^_^ 的本地化字符串。
         /// </summary>
-        public static string Welcome {
+        public static string WelcomeText {
             get {
-                return ResourceManager.GetString("Welcome", resourceCulture);
+                return ResourceManager.GetString("WelcomeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 With 的本地化字符串。
+        /// </summary>
+        public static string WithTitleText {
+            get {
+                return ResourceManager.GetString("WithTitleText", resourceCulture);
             }
         }
         
         /// <summary>
         ///   查找类似 Yesterday 的本地化字符串。
         /// </summary>
-        public static string Yesterday {
+        public static string YesterdayText {
             get {
-                return ResourceManager.GetString("Yesterday", resourceCulture);
+                return ResourceManager.GetString("YesterdayText", resourceCulture);
             }
         }
     }

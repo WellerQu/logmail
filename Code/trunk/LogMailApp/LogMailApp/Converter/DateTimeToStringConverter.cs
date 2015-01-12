@@ -27,11 +27,11 @@ namespace LogMailApp.Converter
                 DateTime newValue = current.Value.AddDays(0 - offset);
                 if (newValue.ToShortDateString() == DateTime.Now.ToShortDateString())
                 {
-                    finalString = Resources.Today;
+                    finalString = Resources.TodayText;
                 }
                 else if (newValue.ToShortDateString() == DateTime.Now.AddDays(-1).ToShortDateString())
                 {
-                    finalString = Resources.Yesterday;
+                    finalString = Resources.YesterdayText;
                 }
                 else
                 {

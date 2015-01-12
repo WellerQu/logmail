@@ -263,18 +263,6 @@ namespace LogMailApp
             }
         }
 
-        private void TextBox_Setting_MouseEnter(object sender, MouseEventArgs e)
-        {
-            TextBox t = sender as TextBox;
-            t.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xFF, 0xFF, 0xFF));
-        }
-
-        private void TextBox_Setting_MouseLeave(object sender, MouseEventArgs e)
-        {
-            TextBox t = sender as TextBox;
-            t.Background = new SolidColorBrush(Color.FromArgb(0xFF, 0xEE, 0xEE, 0xEE));
-        }
-
         private void TextBox_LogContent_GotFocus(object sender, RoutedEventArgs e)
         {
             this.ShowButton(this.btnSave, this.durationGlobal);
@@ -296,6 +284,17 @@ namespace LogMailApp
 #endif
                 this.SaveData();
             }
+        }
+
+        private void TextBox_Setting_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox t = sender as TextBox;
+           
+        }
+
+        private void TextBox_Setting_LostFocus(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void btnDelete_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

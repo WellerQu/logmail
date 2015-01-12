@@ -21,7 +21,7 @@ namespace LogMailApp.VM
             this.LoadLogCommand = new LoadLogCommand(this);
 
             this.LogDate = DateTime.Now;
-            this.LogContent = Resources.Welcome;
+            this.LogContent = Resources.WelcomeText;
             this.SelectedDate = this.LogDate;
         }
 
@@ -32,7 +32,7 @@ namespace LogMailApp.VM
         private CommandBase DeleteLogCommand = null;
         private CommandBase LoadLogCommand = null;
 
-        public string NewButtonText { get; set; }
+        public string NewButtonText { get; private set; }
 
         public DateTime? LogDate
         {

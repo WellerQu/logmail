@@ -14,6 +14,6 @@ namespace LogMailApp.VM
             this.AboutButtonText = Resources.AboutButtonText;
         }
 
-        public string AboutButtonText { get; set; }
+        public string AboutButtonText { get; private set; }
     }
 }

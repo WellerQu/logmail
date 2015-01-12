@@ -34,6 +34,7 @@ namespace LogMailApp.Preference
         #region 首选项节点路径
         private const string ISFIRSTUSING_NODE_PATH = "preference/isFirstUsing";
         private const string EMAIL_NODE_PATH = "preference/email";
+        private const string PASSWORD_NODE_PATH = "preference/password";
         private const string TO_NODE_PATH = "preference/to";
         private const string WITH_NODE_PATH = "preference/with";
         private const string WHEN_NODE_PATH = "preference/when";
@@ -68,6 +69,19 @@ namespace LogMailApp.Preference
             set
             {
                 this.PreferenceDoc.SelectSingleNode(EMAIL_NODE_PATH).InnerText = value;
+                this.Save();
+            }
+        }
+
+        public string Password
+        {
+            get
+            {
+                return this.PreferenceDoc.SelectSingleNode(PASSWORD_NODE_PATH).InnerText;
+            }
+            set
+            {
+                this.PreferenceDoc.SelectSingleNode(PASSWORD_NODE_PATH).InnerText = value;
                 this.Save();
             }
         }

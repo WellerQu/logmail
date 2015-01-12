@@ -121,23 +121,47 @@
     <value>About</value>
     <comment>关于按钮的文本</comment>
   </data>
+  <data name="DirTitleText" xml:space="preserve">
+    <value>FileDirectory</value>
+    <comment>设置界面的日志文档存放目录字段</comment>
+  </data>
+  <data name="EmailTitleText" xml:space="preserve">
+    <value>Email</value>
+    <comment>设置界面的Email字段</comment>
+  </data>
+  <data name="EmptyTitleText" xml:space="preserve">
+    <value>DefaultEmpty</value>
+    <comment>设置界面的默认邮件内容字段</comment>
+  </data>
   <data name="NewButtonText" xml:space="preserve">
     <value>New</value>
     <comment>新建按钮的文本</comment>
+  </data>
+  <data name="PasswordTitleText" xml:space="preserve">
+    <value>Password</value>
+    <comment>设置界面的密码字段</comment>
   </data>
   <data name="SettingButtonText" xml:space="preserve">
     <value>Setting</value>
     <comment>设置按钮的文本</comment>
   </data>
-  <data name="Today" xml:space="preserve">
+  <data name="TodayText" xml:space="preserve">
     <value>Today</value>
     <comment>日期选择中的"今天"</comment>
   </data>
-  <data name="Welcome" xml:space="preserve">
+  <data name="ToTitleText" xml:space="preserve">
+    <value>To</value>
+    <comment>设置界面目标Email字段</comment>
+  </data>
+  <data name="WelcomeText" xml:space="preserve">
     <value>Welcome to use Log Mail App ^_^</value>
     <comment>日志内容为空时出现的替代文本</comment>
   </data>
-  <data name="Yesterday" xml:space="preserve">
+  <data name="WithTitleText" xml:space="preserve">
+    <value>With</value>
+    <comment>设置界面抄送字段</comment>
+  </data>
+  <data name="YesterdayText" xml:space="preserve">
     <value>Yesterday</value>
     <comment>日期选择中的"昨天"</comment>
   </data>
