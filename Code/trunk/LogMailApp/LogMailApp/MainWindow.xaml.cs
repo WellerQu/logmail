@@ -199,18 +199,18 @@ namespace LogMailApp
         }
 
         // 鼠标滑轮翻页日志
-        int wheelCount = 0; // 滑轮太灵敏
+        //int wheelCount = 0; // 滑轮太灵敏
         private void EditorPanel_MouseWheel(object sender, MouseWheelEventArgs e)
         {
-            wheelCount++;
+            //wheelCount++;
 #if DEBUG
             Debug.WriteLine("Wheel: " + e.Delta);
             // Down -120
             // Up   120
 #endif
-            if (!this.txtLogContent.IsFocused && wheelCount == 3)
+            if (!this.txtLogContent.IsFocused/* && wheelCount == 3*/)
             {
-                wheelCount = 0;
+                //wheelCount = 0;
                 int delta = e.Delta / 120;
 
                 VM.VMMainWindow mainWindow = this.DataContext as VM.VMMainWindow;
@@ -228,6 +228,37 @@ namespace LogMailApp
                     TextBlock dateItem = this.datePointerDic[key];
 
                     this.TextBlock_Date_PreviewMouseLeftButtonDown(dateItem, null);
+
+                    Storyboard sb = new Storyboard();
+                    Duration myDuration = new Duration(TimeSpan.FromMilliseconds(400));
+
+                    ThicknessAnimation toMargin = new ThicknessAnimation();
+                    toMargin.Duration = myDuration;
+                    toMargin.FillBehavior = FillBehavior.Stop;
+                    Storyboard.SetTargetProperty(toMargin, new PropertyPath("Margin"));
+
+                    DoubleAnimation toOpacity = new DoubleAnimation();
+                    toOpacity.Duration = myDuration;
+                    toOpacity.FillBehavior = FillBehavior.Stop;
+                    toOpacity.From = 0;
+                    toOpacity.To = 1;
+                    Storyboard.SetTargetProperty(toOpacity, new PropertyPath("Opacity"));
+
+                    if (delta < 0)
+                    {
+                        toMargin.From = new Thickness(0, -300, 0, 0);
+                        toMargin.To = new Thickness(0, 0, 0, 0);
+                    }
+                    else if (delta > 0)
+                    {
+                        toMargin.From = new Thickness(0, 300, 0, 0);
+                        toMargin.To = new Thickness(0, 0, 0, 0);
+                    }
+
+                    sb.Children.Add(toMargin);
+                    sb.Children.Add(toOpacity);
+
+                    this.gdContent.BeginStoryboard(sb);
                 }
             }
         }
