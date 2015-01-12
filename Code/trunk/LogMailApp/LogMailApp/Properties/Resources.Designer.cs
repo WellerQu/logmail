@@ -61,6 +61,33 @@ namespace LogMailApp.Properties {
         }
         
         /// <summary>
+        ///   查找类似 About 的本地化字符串。
+        /// </summary>
+        public static string AboutButtonText {
+            get {
+                return ResourceManager.GetString("AboutButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 New 的本地化字符串。
+        /// </summary>
+        public static string NewButtonText {
+            get {
+                return ResourceManager.GetString("NewButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Setting 的本地化字符串。
+        /// </summary>
+        public static string SettingButtonText {
+            get {
+                return ResourceManager.GetString("SettingButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Today 的本地化字符串。
         /// </summary>
         public static string Today {

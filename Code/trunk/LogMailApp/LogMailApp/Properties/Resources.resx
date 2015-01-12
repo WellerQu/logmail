@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutButtonText" xml:space="preserve">
+    <value>About</value>
+    <comment>关于按钮的文本</comment>
+  </data>
+  <data name="NewButtonText" xml:space="preserve">
+    <value>New</value>
+    <comment>新建按钮的文本</comment>
+  </data>
+  <data name="SettingButtonText" xml:space="preserve">
+    <value>Setting</value>
+    <comment>设置按钮的文本</comment>
+  </data>
   <data name="Today" xml:space="preserve">
     <value>Today</value>
     <comment>日期选择中的"今天"</comment>

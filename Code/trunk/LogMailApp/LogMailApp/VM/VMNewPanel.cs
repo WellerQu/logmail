@@ -14,12 +14,15 @@ namespace LogMailApp.VM
     {
         public VMNewPanel()
         {
+            this.NewButtonText = Resources.NewButtonText;
+
             this.SaveLogCommand = new SaveLogCommand(this);
             this.DeleteLogCommand = new DeleteLogCommand(this);
             this.LoadLogCommand = new LoadLogCommand(this);
 
             this.LogDate = DateTime.Now;
             this.LogContent = Resources.Welcome;
+            this.SelectedDate = this.LogDate;
         }
 
         private string _LogContent;
@@ -28,6 +31,8 @@ namespace LogMailApp.VM
         private CommandBase SaveLogCommand = null;
         private CommandBase DeleteLogCommand = null;
         private CommandBase LoadLogCommand = null;
+
+        public string NewButtonText { get; set; }
 
         public DateTime? LogDate
         {
@@ -42,7 +47,11 @@ namespace LogMailApp.VM
         public DateTime? SelectedDate
         {
             get { return _SelectedDate; }
-            set { _SelectedDate = value; }
+            set
+            {
+                _SelectedDate = value;
+                this.OnPropertyChanged("SelectedDate");
+            }
         }
 
         public string LogContent
@@ -68,6 +77,14 @@ namespace LogMailApp.VM
             get
             {
                 return this.DeleteLogCommand;
+            }
+        }
+
+        public ICommand Load
+        {
+            get
+            {
+                return this.LoadLogCommand;
             }
         }
     }
