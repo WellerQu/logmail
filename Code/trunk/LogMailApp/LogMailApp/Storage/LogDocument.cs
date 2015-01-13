@@ -25,7 +25,6 @@ namespace LogMailApp.Storage
             this.Storager.Key = name;
             this.Storager.Content = content;
 
-            this.Storager.File();   // 归档
             this.Storager.Save();   // 保存
         }
 

@@ -63,12 +63,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\AppendLogCommand.cs" />
     <Compile Include="Command\CommandBase.cs" />
     <Compile Include="Command\DeleteLogCommand.cs" />
     <Compile Include="Command\EditorPanelCommand.cs" />
+    <Compile Include="Command\Executor.cs" />
+    <Compile Include="Command\FileLogCommand.cs" />
     <Compile Include="Command\LoadLogCommand.cs" />
     <Compile Include="Command\PostLogCommand.cs" />
     <Compile Include="Command\SaveLogCommand.cs" />
+    <Compile Include="Command\UICommand.cs" />
     <Compile Include="Communication\IPoster.cs" />
     <Compile Include="Communication\EmailPoster.cs" />
     <Compile Include="Communication\PosterFactory.cs" />

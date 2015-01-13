@@ -105,7 +105,7 @@ namespace LogMailApp
             DoubleAnimation toMove = new DoubleAnimation();
             toMove.Duration = duration;
             toMove.From = this.Top;
-            toMove.To = this.Top - 30;
+            toMove.To = this.Top - 20;
             Storyboard.SetTargetProperty(toMove, new PropertyPath("Top"));
 
             DoubleAnimation toOpacity = new DoubleAnimation();

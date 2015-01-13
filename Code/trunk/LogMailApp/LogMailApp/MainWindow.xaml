@@ -4,7 +4,7 @@
         xmlns:vm="clr-namespace:LogMailApp.VM"
         xmlns:converter="clr-namespace:LogMailApp.Converter"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="LogMailApp.MainWindow"
-        Title="MainWindow" Height="420" Width="580" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Closed="Window_Closed" Closing="Window_Closing">
+        Title="MainWindow" Height="420" Width="580" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Closed="Window_Closed" Closing="Window_Closing" AllowsTransparency="True" BorderThickness="0,1,1,1" BorderBrush="#FF333333">
     <Window.DataContext>
         <vm:VMMainWindow />
     </Window.DataContext>

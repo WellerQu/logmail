@@ -44,5 +44,10 @@ namespace LogMailApp.Command
             if (handler != null)
                 handler(this, new CanExecuteChangedEventArgs() { Current = this.LastCanExecute });
         }
+
+        /// <summary>
+        /// 命令优先级, 数值越小优先级越高
+        /// </summary>
+        public int Order { get; set; }
     }
 }

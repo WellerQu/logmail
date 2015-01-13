@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using LogMailApp.Command;
 using LogMailApp.Preference;
 
 namespace LogMailApp
@@ -14,19 +16,11 @@ namespace LogMailApp
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         static void Main(string[] args)
         {
-            UserDefault userDefault = UserDefault.Instance;
+            CommandLineParser parser = new CommandLineParser(args);
+            ICommand[] cmds = parser.Commands;
 
-            //if (!userDefault.IsFirstUsing && new Cmd(args).ToBeContinued)
-            //{
-            App app = new App();
-
-            app.MainWindow = new MainWindow(userDefault.IsFirstUsing);
-            //app.MainWindow = new WarningWindow("Hello World");
-
-            app.MainWindow.Show();
-
-            app.Run();
-            //}
+            Executor executor = new Executor(cmds);
+            executor.Run();
         }
     }
 }
