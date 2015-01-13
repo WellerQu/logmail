@@ -22,6 +22,8 @@ namespace LogMailApp.Command
 
         public override void Execute(object parameter)
         {
+            System.IO.File.AppendAllText("debug.log", "-UI");
+
             App app = new App();
 
             app.MainWindow = new MainWindow();

@@ -11,9 +11,9 @@ namespace LogMailApp
 {
     static class Program
     {
-        [System.STAThreadAttribute()]
-        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        //[System.STAThreadAttribute()]
+        //[System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        //[System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         static void Main(string[] args)
         {
             CommandLineParser parser = new CommandLineParser(args);

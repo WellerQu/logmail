@@ -8,12 +8,15 @@ using LogMailApp.Command;
 
 namespace LogMailApp
 {
+    /// <summary>
+    /// 命令行参数解析器
+    /// </summary>
     class CommandLineParser
     {
         public CommandLineParser(string[] args)
         {
             // -f -p -a -ui -d
-            List<ICommand> commands = new List<ICommand>();
+            List<CommandBase> commands = new List<CommandBase>();
             Stack<string> stack = new Stack<string>();
 
             foreach (string str in args)
@@ -25,9 +28,12 @@ namespace LogMailApp
                 }
                 else
                 {
-                    // 是参数就出栈
-                    string paramters = stack.Pop();
-                    string cmdName = str;
+                    // 是参数把命令就出栈
+                    string cmdName = stack.Pop();
+                    string parameter = str;
+
+                    CommandBase cmd = this.CreateCommand(cmdName, parameter);
+                    commands.Add(cmd);
                 }
             }
 
@@ -35,19 +41,34 @@ namespace LogMailApp
             {
                 // 剩下的都是无参数的构造函数
                 string cmdName = stack.Pop();
+                CommandBase cmd = this.CreateCommand(cmdName, null);
+                commands.Add(cmd);
             }
+
+            this.Commands = commands.OrderBy(obj => obj.Order).ToArray();
         }
 
-        public ICommand[] Commands { get; protected set; }
+        public CommandBase[] Commands { get; protected set; }
 
-        private ICommand CreateCommand(string name, params string paramters)
+        protected virtual CommandBase CreateCommand(string name, string paramter)
         {
-            ICommand cmd = null;
+            CommandBase cmd = null;
+            UserData userData = new UserData();
 
             if ("-a".Equals(name))
             {
+                userData[AppendLogCommand.LOG_NAME_KEY] = DateTime.Now.ToString("yyyy-MM-dd");
+                userData[AppendLogCommand.LOG_CONT_KEY] = paramter;
 
-                //cmd = new AppendLogCommand(
+                cmd = new AppendLogCommand(userData);
+            }
+            else if ("-p".Equals(name))
+            {
+
+            }
+            else if ("-ui".Equals(name))
+            {
+                cmd = new UICommand(null);
             }
 
             return cmd;
