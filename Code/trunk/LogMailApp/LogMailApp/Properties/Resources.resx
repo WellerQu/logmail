@@ -134,7 +134,7 @@
     <comment>设置界面的默认邮件内容字段</comment>
   </data>
   <data name="NewButtonText" xml:space="preserve">
-    <value>New</value>
+    <value>Editor</value>
     <comment>新建按钮的文本</comment>
   </data>
   <data name="PasswordTitleText" xml:space="preserve">
@@ -164,5 +164,13 @@
   <data name="YesterdayText" xml:space="preserve">
     <value>Yesterday</value>
     <comment>日期选择中的"昨天"</comment>
+  </data>
+  <data name="SmtpTitleText" xml:space="preserve">
+    <value>STMP</value>
+    <comment>设置界面的发送邮件服务器字段</comment>
+  </data>
+  <data name="NULL_EXCEPTION_MESSAGE" xml:space="preserve">
+    <value>Email content cannot be empty</value>
+    <comment>当发现邮件内容为空时的警告信息</comment>
   </data>
 </root>

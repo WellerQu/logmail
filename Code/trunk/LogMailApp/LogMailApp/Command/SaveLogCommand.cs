@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LogMailApp.VM;
+﻿using LogMailApp.Storage;
 
 namespace LogMailApp.Command
 {
-    class SaveLogCommand : CommandBase
+    class SaveLogCommand : EditorPanelCommand
     {
-        public SaveLogCommand(VMNewPanel ViewModel)
-        { }
+        public SaveLogCommand(UserData userData)
+            : base(userData)
+        {
+        }
 
         public override void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            if (this.ViewModel != null)
+            {
+                string name = this.ViewModel.SelectedDate.Value.ToString("yyyy-MM-dd");
+                string[] content = this.ViewModel.LogContent.Split('\r', '\n');
+
+                LogDocument doc = new LogDocument();
+                doc.Save(name, content);
+            }
         }
     }
 }

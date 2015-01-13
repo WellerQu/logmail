@@ -33,6 +33,7 @@ namespace LogMailApp.Preference
 
         #region 首选项节点路径
         private const string ISFIRSTUSING_NODE_PATH = "preference/isFirstUsing";
+        private const string SMTP_NODE_PATH = "preference/smtp";
         private const string EMAIL_NODE_PATH = "preference/email";
         private const string PASSWORD_NODE_PATH = "preference/password";
         private const string TO_NODE_PATH = "preference/to";
@@ -42,6 +43,8 @@ namespace LogMailApp.Preference
         private const string DIRECTORY_NODE_PATH = "preference/directory";
         private const string README_NODE_PATH = "preference/readme";
         private const string EMPTY_NODE_PATH = "preference/empty";
+        private const string SUBJECT_NODE_PATH = "preference/subject";
+        private const string FOOTER_NODE_PATH = "preference/subject";
         #endregion
 
         private XmlDocument PreferenceDoc = null;
@@ -56,6 +59,19 @@ namespace LogMailApp.Preference
             set
             {
                 this.PreferenceDoc.SelectSingleNode(ISFIRSTUSING_NODE_PATH).InnerText = value.ToString();
+                this.Save();
+            }
+        }
+
+        public string SMTP
+        {
+            get
+            {
+                return this.PreferenceDoc.SelectSingleNode(SMTP_NODE_PATH).InnerText;
+            }
+            set
+            {
+                this.PreferenceDoc.SelectSingleNode(SMTP_NODE_PATH).InnerText = value;
                 this.Save();
             }
         }
@@ -161,6 +177,33 @@ namespace LogMailApp.Preference
         }
 
         /// <summary>
+        /// 设置或获取日志邮件的标题
+        /// </summary>
+        public string Subject
+        {
+            get
+            {
+                return this.PreferenceDoc.SelectSingleNode(SUBJECT_NODE_PATH).InnerText;
+            }
+            set
+            {
+                this.PreferenceDoc.SelectSingleNode(SUBJECT_NODE_PATH).InnerText = value;
+                this.Save();
+            }
+        }
+
+        /// <summary>
+        /// 获取日志邮件的注脚
+        /// </summary>
+        public string Footer
+        {
+            get
+            {
+                return this.PreferenceDoc.SelectSingleNode(FOOTER_NODE_PATH).InnerText;
+            }
+        }
+
+        /// <summary>
         /// 获取README.md文件的内容
         /// </summary>
         public string[] Readme
@@ -169,6 +212,9 @@ namespace LogMailApp.Preference
             {
                 string path = this.PreferenceDoc.SelectSingleNode(README_NODE_PATH).InnerText;
                 string[] content = File.ReadAllLines(path, Encoding.UTF8);
+
+                if (content != null)
+                    content = content.Where(obj => !obj.StartsWith("#")).ToArray<string>();
 
                 return content;
             }

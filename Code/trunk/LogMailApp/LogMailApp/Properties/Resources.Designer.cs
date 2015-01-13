@@ -97,11 +97,20 @@ namespace LogMailApp.Properties {
         }
         
         /// <summary>
-        ///   查找类似 New 的本地化字符串。
+        ///   查找类似 Editor 的本地化字符串。
         /// </summary>
         public static string NewButtonText {
             get {
                 return ResourceManager.GetString("NewButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Email content cannot be empty 的本地化字符串。
+        /// </summary>
+        public static string NULL_EXCEPTION_MESSAGE {
+            get {
+                return ResourceManager.GetString("NULL_EXCEPTION_MESSAGE", resourceCulture);
             }
         }
         
@@ -120,6 +129,15 @@ namespace LogMailApp.Properties {
         public static string SettingButtonText {
             get {
                 return ResourceManager.GetString("SettingButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 STMP 的本地化字符串。
+        /// </summary>
+        public static string SmtpTitleText {
+            get {
+                return ResourceManager.GetString("SmtpTitleText", resourceCulture);
             }
         }
         

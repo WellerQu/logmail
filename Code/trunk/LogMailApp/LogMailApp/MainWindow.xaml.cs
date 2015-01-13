@@ -23,7 +23,7 @@ namespace LogMailApp
             InitializeComponent();
 
             VM.VMMainWindow mainWindow = this.DataContext as VM.VMMainWindow;
-            VM.VMNewPanel newPanel = mainWindow.NewPanelDataContext;
+            VM.VMEditorPanel newPanel = mainWindow.NewPanelDataContext;
 
             UIElementCollection uiDateItem = this.DatePicker.Children;
 
@@ -97,7 +97,32 @@ namespace LogMailApp
 
         private void Image_Close_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            this.Close();
+            #region 窗口退出动画
+            Duration duration = new Duration(TimeSpan.FromMilliseconds(300));
+
+            Storyboard sb = new Storyboard();
+
+            DoubleAnimation toMove = new DoubleAnimation();
+            toMove.Duration = duration;
+            toMove.From = this.Top;
+            toMove.To = this.Top - 30;
+            Storyboard.SetTargetProperty(toMove, new PropertyPath("Top"));
+
+            DoubleAnimation toOpacity = new DoubleAnimation();
+            toOpacity.Duration = duration;
+            toOpacity.From = 1;
+            toOpacity.To = 0;
+            Storyboard.SetTargetProperty(toOpacity, new PropertyPath("Opacity"));
+
+            sb.Children.Add(toMove);
+            sb.Children.Add(toOpacity);
+            sb.Completed += (object window, EventArgs evt) =>
+            {
+                this.Close();
+            };
+
+            this.BeginStoryboard(sb);
+            #endregion
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -214,7 +239,7 @@ namespace LogMailApp
                 int delta = e.Delta / 120;
 
                 VM.VMMainWindow mainWindow = this.DataContext as VM.VMMainWindow;
-                VM.VMNewPanel newPanel = mainWindow.NewPanelDataContext;
+                VM.VMEditorPanel newPanel = mainWindow.NewPanelDataContext;
 
                 DateTime? shouldDate = newPanel.SelectedDate.Value.AddDays(delta);
 
@@ -288,13 +313,12 @@ namespace LogMailApp
 
         private void TextBox_Setting_GotFocus(object sender, RoutedEventArgs e)
         {
-            TextBox t = sender as TextBox;
-           
+            // 还没想好写什么, 先放着
         }
 
         private void TextBox_Setting_LostFocus(object sender, RoutedEventArgs e)
         {
-
+            // 还没想好写什么, 先放着
         }
 
         private void btnDelete_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

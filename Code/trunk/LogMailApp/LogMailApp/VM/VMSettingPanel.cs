@@ -21,11 +21,13 @@ namespace LogMailApp.VM
             this.WithTitleText = Resources.WithTitleText;
             this.EmptyTitleText = Resources.EmptyTitleText;
             this.DirTitleText = Resources.DirTitleText;
+            this.SmtpTitleText = Resources.SmtpTitleText;
         }
 
         public string SettingButtonText { get; private set; }
         public string EmailTitleText { get; private set; }
         public string PasswordTitleText { get; private set; }
+        public string SmtpTitleText { get; private set; }
         public string ToTitleText { get; private set; }
         public string WithTitleText { get; private set; }
         public string EmptyTitleText { get; private set; }
@@ -51,6 +53,19 @@ namespace LogMailApp.VM
             {
                 UserDefault.Instance.Password = value;
                 this.OnPropertyChanged("Password");
+            }
+        }
+
+        public string Smtp
+        {
+            get
+            {
+                return UserDefault.Instance.SMTP;
+            }
+            set
+            {
+                UserDefault.Instance.SMTP = value;
+                this.OnPropertyChanged("Smtp");
             }
         }
 

@@ -2,6 +2,8 @@
 <preference>
   <!-- 首次使用 -->
   <isFirstUsing>False</isFirstUsing>
+  <!-- SMTP Server -->
+  <smtp>smtpcom.263xmail.com</smtp>
   <!-- 发送邮件的Email -->
   <email></email>
   <!-- 登录密码 -->
@@ -22,4 +24,8 @@
   <readme>README.md</readme>
   <!-- Welcome -->
   <welcome>Welcome to use Log Mail *^_^*</welcome>
+  <!-- subject text -->
+  <subject>工作日志</subject>
+  <!-- footer text -->
+  <foot>-- 来自LogMail日志助手, 领导再也不担心我忘记发日志了.</foot>
 </preference>

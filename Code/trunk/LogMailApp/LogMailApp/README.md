@@ -1,6 +1,7 @@
 ﻿Log Mail
 -------------------------------
-Version: 1.0.0 beta
+Version:	1.0.0 beta
+Thanks To:	
 -------------------------------
 Developer:		Weller Qu
 UI Designer:	Weller Qu

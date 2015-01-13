@@ -11,12 +11,12 @@ namespace LogMailApp.VM
     {
         public VMMainWindow()
         {
-            this.NewPanelDataContext = new VMNewPanel();
+            this.NewPanelDataContext = new VMEditorPanel();
             this.SettingPanelDataContext = new VMSettingPanel();
             this.AboutPanelDataContext = new VMAboutPanel();
         }
 
-        public VMNewPanel NewPanelDataContext { get; set; }
+        public VMEditorPanel NewPanelDataContext { get; set; }
         public VMSettingPanel SettingPanelDataContext { get; set; }
         public VMAboutPanel AboutPanelDataContext { get; set; }
     }

@@ -14,6 +14,10 @@ namespace LogMailApp.Command
 
     abstract class CommandBase : ICommand
     {
+        public CommandBase()
+        {
+        }
+
         public bool LastCanExecute = true;
 
         #region ICommand 成员

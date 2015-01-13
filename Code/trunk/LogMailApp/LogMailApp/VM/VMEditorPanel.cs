@@ -10,15 +10,18 @@ using LogMailApp.Properties;
 
 namespace LogMailApp.VM
 {
-    class VMNewPanel : ViewModel
+    class VMEditorPanel : ViewModel
     {
-        public VMNewPanel()
+        public VMEditorPanel()
         {
             this.NewButtonText = Resources.NewButtonText;
 
-            this.SaveLogCommand = new SaveLogCommand(this);
-            this.DeleteLogCommand = new DeleteLogCommand(this);
-            this.LoadLogCommand = new LoadLogCommand(this);
+            UserData userData = new UserData();
+            userData[EditorPanelCommand.VIEWMODEL_KEY] = this;
+
+            this.SaveLogCommand = new SaveLogCommand(userData);
+            this.DeleteLogCommand = new DeleteLogCommand(userData);
+            this.LoadLogCommand = new LoadLogCommand(userData);
 
             this.LogDate = DateTime.Now;
             this.LogContent = Resources.WelcomeText;
