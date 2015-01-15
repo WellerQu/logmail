@@ -7,19 +7,19 @@
     <Window.DataContext>
         <vm:VMWarningWindow />
     </Window.DataContext>
-    <Grid>
+    <Grid d:IsLocked="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Margin="0" Background="#FFB4B4B4" PreviewMouseLeftButtonDown="Grid_Title_PreviewMouseLeftButtonDown">
-            <Label Content="Notify" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0.5" FontFamily="Calibri" Foreground="White" FontWeight="Bold"/>
-            <Image HorizontalAlignment="Right" Margin="0, 0, 7, 0" Width="12" Height="12" PreviewMouseLeftButtonDown="Image_Close_PreviewMouseLeftButtonDown" Source="Images/close.png" VerticalAlignment="Center">
+        <Grid Margin="0" Background="#FFB4B4B4" PreviewMouseLeftButtonDown="Grid_Title_PreviewMouseLeftButtonDown" d:IsLocked="True">
+            <Label Content="Notify" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0.5" FontFamily="Calibri" Foreground="White" FontWeight="Bold" d:IsLocked="True"/>
+            <Image HorizontalAlignment="Right" Margin="0, 0, 7, 0" Width="12" Height="12" PreviewMouseLeftButtonDown="Image_Close_PreviewMouseLeftButtonDown" Source="Images/close.png" VerticalAlignment="Center" d:IsLocked="True">
                 <Image.Effect>
                     <DropShadowEffect BlurRadius="6" Direction="271" ShadowDepth="0" Color="#FF636363"/>
                 </Image.Effect>
             </Image>
         </Grid>
-        <TextBlock HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,30" Width="300" TextAlignment="Center" Text="{Binding Text}"/>
+        <TextBlock HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,30" Width="300" TextAlignment="Center" Text="{Binding Text}" d:IsLocked="True"/>
     </Grid>
 </Window>
