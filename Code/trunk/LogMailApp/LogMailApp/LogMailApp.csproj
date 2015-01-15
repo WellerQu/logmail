@@ -82,7 +82,7 @@
     <Compile Include="Exception\EmailContentNullException.cs" />
     <Compile Include="Exception\ExceptionBase.cs" />
     <Compile Include="Preference\UserDefault.cs" />
-    <Compile Include="Storage\FileStorager.cs" />
+    <Compile Include="Storage\LogFileStorager.cs" />
     <Compile Include="Storage\IStorager.cs" />
     <Compile Include="Storage\LogDocument.cs" />
     <Compile Include="Storage\StoragerFactory.cs" />

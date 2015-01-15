@@ -25,7 +25,7 @@ namespace LogMailApp.Command
         public virtual bool CanExecute(object parameter)
         {
 #if DEBUG_UI
-            LastCanExecute = false;
+            LastCanExecute = true;
 #else
             LastCanExecute = true;
 #endif

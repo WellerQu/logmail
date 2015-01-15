@@ -103,7 +103,7 @@ namespace LogMailApp.VM
         {
             get
             {
-                return Path.Combine(Environment.CurrentDirectory, UserDefault.Instance.DirectoryPath);
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UserDefault.Instance.DirectoryPath);
             }
             set
             {

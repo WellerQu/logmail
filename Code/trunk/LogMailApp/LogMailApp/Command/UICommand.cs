@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LogMailApp.Preference;
 
 namespace LogMailApp.Command
 {
@@ -22,11 +23,9 @@ namespace LogMailApp.Command
 
         public override void Execute(object parameter)
         {
-            System.IO.File.AppendAllText("debug.log", "-UI");
-
             App app = new App();
 
-            app.MainWindow = new MainWindow();
+            app.MainWindow = new MainWindow(UserDefault.Instance.IsFirstUsing);
 
             if (this.UserData != null && this.UserData[WIN_CONT_KEY] != null)
             {

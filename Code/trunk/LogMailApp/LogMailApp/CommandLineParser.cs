@@ -33,7 +33,9 @@ namespace LogMailApp
                     string parameter = str;
 
                     CommandBase cmd = this.CreateCommand(cmdName, parameter);
-                    commands.Add(cmd);
+
+                    if (cmd != null)
+                        commands.Add(cmd);
                 }
             }
 
@@ -42,7 +44,9 @@ namespace LogMailApp
                 // 剩下的都是无参数的构造函数
                 string cmdName = stack.Pop();
                 CommandBase cmd = this.CreateCommand(cmdName, null);
-                commands.Add(cmd);
+
+                if (cmd != null)
+                    commands.Add(cmd);
             }
 
             this.Commands = commands.OrderBy(obj => obj.Order).ToArray();

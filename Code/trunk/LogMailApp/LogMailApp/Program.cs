@@ -11,16 +11,25 @@ namespace LogMailApp
 {
     static class Program
     {
-        //[System.STAThreadAttribute()]
-        //[System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        //[System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
+        [System.STAThreadAttribute()]
+        [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         static void Main(string[] args)
         {
-            CommandLineParser parser = new CommandLineParser(args);
-            ICommand[] cmds = parser.Commands;
+            Console.WriteLine("Hello LogMail");
 
-            Executor executor = new Executor(cmds);
-            executor.Run();
+            try
+            {
+                CommandLineParser parser = new CommandLineParser(args);
+                ICommand[] cmds = parser.Commands;
+
+                Executor executor = new Executor(cmds);
+                executor.Run();
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(string.Format("[{0}]:{1}", DateTime.Now, ex.Message));
+            }
         }
     }
 }

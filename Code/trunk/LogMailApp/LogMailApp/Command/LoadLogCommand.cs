@@ -14,13 +14,16 @@ namespace LogMailApp.Command
             LogDocument doc = new LogDocument();
             string[] content = doc.Load(this.ViewModel.SelectedDate.Value.ToString("yyyy-MM-dd"));
 
-            StringBuilder sbContent = new StringBuilder();
-            foreach (var line in content)
+            if (content != null)
             {
-                sbContent.AppendLine(line);
-            }
+                StringBuilder sbContent = new StringBuilder();
+                foreach (var line in content)
+                {
+                    sbContent.AppendLine(line);
+                }
 
-            this.ViewModel.LogContent = sbContent.ToString();
+                this.ViewModel.LogContent = sbContent.ToString();
+            }
         }
     }
 }

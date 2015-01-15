@@ -22,7 +22,9 @@ namespace LogMailApp.Preference
             if (null == Instance.PreferenceDoc)
                 Instance.PreferenceDoc = new XmlDocument();
 
-            Instance.PreferenceDoc.Load(Path.Combine(Environment.CurrentDirectory, PREFERENCEXML_NAME));
+            //Console.WriteLine("Hello UserDefault: {0}", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PREFERENCEXML_NAME));
+
+            Instance.PreferenceDoc.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PREFERENCEXML_NAME));
         }
 
         protected UserDefault()
