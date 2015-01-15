@@ -22,8 +22,6 @@
   <directory>MyLogs</directory>
   <!-- Readme.md文件的物理路径 -->
   <readme>README.md</readme>
-  <!-- Welcome -->
-  <welcome>Welcome to use Log Mail *^_^*</welcome>
   <!-- subject text -->
   <subject>工作日志</subject>
   <!-- footer text -->

@@ -71,14 +71,10 @@ namespace LogMailApp
 
             this.BeginStoryboard(sb);
             #endregion
-        }
 
-        public MainWindow(bool onlySetting)
-            : this()
-        {
             Button btnStart = null;
 
-            if (onlySetting)
+            if (UserDefault.Instance.IsFirstUsing)
                 btnStart = this.btnSetting;
             else
                 btnStart = this.btnNew;
@@ -89,6 +85,8 @@ namespace LogMailApp
         private readonly Duration durationGlobal = new Duration(TimeSpan.FromMilliseconds(200));
         private int lastTag = -1;    // Tab 按钮的标记
         private Dictionary<string, TextBlock> datePointerDic = new Dictionary<string, TextBlock>();
+        private bool hasChange = false;
+        private string lastContent = string.Empty;
 
         private void Window_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -290,24 +288,48 @@ namespace LogMailApp
 
         private void TextBox_LogContent_GotFocus(object sender, RoutedEventArgs e)
         {
+            this.lastContent = (sender as TextBox).Text;
+
             this.ShowButton(this.btnSave, this.durationGlobal);
             this.HideButton(this.btnDelete, this.durationGlobal);
         }
 
         private void TextBox_LogContent_LostFocus(object sender, RoutedEventArgs e)
         {
+            this.hasChange = !this.lastContent.Equals((sender as TextBox).Text);
+
             this.ShowButton(this.btnDelete, this.durationGlobal);
             this.HideButton(this.btnSave, this.durationGlobal);
         }
 
-        private void TextBox_LogContent_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if ((e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && e.Key == Key.Enter)
+            if ((e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
+                if (e.Key == Key.S)
+                {
 #if DEBUG_UI
                 Debug.WriteLine("Save Action, Now!");
 #endif
-                this.SaveData();
+                    this.SaveData();
+
+                }
+                else if (e.Key == Key.D)
+                {
+#if DEBUG_UI
+                Debug.WriteLine("Delete Action, Now!");
+#endif
+                    this.DeleteData();
+                }
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Enter)
+            {
+                this.txtLogContent.Focus();
+            }
+            else if (e.Key == Key.Escape)
+            {
+                this.Image_Close_PreviewMouseLeftButtonDown(null, null);
             }
         }
 
@@ -324,6 +346,11 @@ namespace LogMailApp
         private void btnDelete_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DeleteData();
+        }
+
+        private void btnSave_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.SaveData(true);
         }
 
         #region 控制空间显示/隐藏的方法, 附带动画效果
@@ -391,27 +418,47 @@ namespace LogMailApp
         /// <summary>
         /// 依赖于SelectedDate值的保存动作
         /// </summary>
-        private void SaveData()
+        private void SaveData(bool isUserClick = false)
         {
+            this.txtLogContent.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+
             // 不能Undo表示没有修改过内容
-            if (this.txtLogContent.CanUndo)
+            if (hasChange || isUserClick)
             {
                 // 保存数据吧
                 VM.VMMainWindow mainWindow = this.DataContext as VM.VMMainWindow;
-                if (mainWindow.NewPanelDataContext.Save.CanExecute(null))
-                    mainWindow.NewPanelDataContext.Save.Execute(null);
-            }
+                try
+                {
+                    if (mainWindow.NewPanelDataContext.Save.CanExecute(null))
+                    {
+                        mainWindow.NewPanelDataContext.Save.Execute(null);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    Window win = new WarningWindow(ex.Message);
+                    win.ShowDialog();
+                }
 
-            this.btnSave.Focus();
+                hasChange = !hasChange;
+            }
         }
 
         private void NextData(DateTime? date)
         {
             VM.VMMainWindow mainWindow = this.DataContext as VM.VMMainWindow;
-            if (mainWindow.NewPanelDataContext.Load.CanExecute(null))
+            try
             {
-                //mainWindow.NewPanelDataContext.SelectedDate = Convert.ToDateTime(txt.Tag);
-                mainWindow.NewPanelDataContext.Load.Execute(null);
+                if (mainWindow.NewPanelDataContext.Load.CanExecute(null))
+                {
+                    mainWindow.NewPanelDataContext.SelectedDate = date;
+                    mainWindow.NewPanelDataContext.Load.Execute(null);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Window win = new WarningWindow(ex.Message);
+                win.ShowDialog();
             }
 #if DEBUG_UI
             mainWindow.NewPanelDataContext.SelectedDate = date;
@@ -420,9 +467,21 @@ namespace LogMailApp
 
         private void DeleteData()
         {
+            this.txtLogContent.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
+
             VM.VMMainWindow mainWindow = this.DataContext as VM.VMMainWindow;
-            if (mainWindow.NewPanelDataContext.Delete.CanExecute(null))
-                mainWindow.NewPanelDataContext.Delete.Execute(null);
+            try
+            {
+                if (mainWindow.NewPanelDataContext.Delete.CanExecute(null))
+                {
+                    mainWindow.NewPanelDataContext.Delete.Execute(null);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Window win = new WarningWindow(ex.Message);
+                win.ShowDialog();
+            }
         }
         #endregion
     }

@@ -4,7 +4,7 @@
         xmlns:vm="clr-namespace:LogMailApp.VM"
         xmlns:converter="clr-namespace:LogMailApp.Converter"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="LogMailApp.MainWindow"
-        Title="MainWindow" Height="420" Width="580" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Closed="Window_Closed" Closing="Window_Closing" AllowsTransparency="True" BorderThickness="0,1,1,1" BorderBrush="#FF333333">
+        Title="MainWindow" Height="420" Width="580" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Closed="Window_Closed" Closing="Window_Closing" AllowsTransparency="True" BorderThickness="0,1,1,1" BorderBrush="#FF333333" PreviewKeyDown="Window_PreviewKeyDown">
     <Window.DataContext>
         <vm:VMMainWindow />
     </Window.DataContext>
@@ -12,7 +12,7 @@
         <converter:DateToShortStringConverter x:Key="DateToShortString"/>
         <converter:DateTimeToStringConverter x:Key="DateTimeToString" />
     </Window.Resources>
-    <Grid Background="#FFEEEEEE" d:IsLocked="True">
+    <Grid Background="#FFEEEEEE">
         <Grid.RowDefinitions>
             <RowDefinition Height="26"/>
             <RowDefinition Height="*"/>
@@ -21,25 +21,25 @@
             <ColumnDefinition Width="155"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Margin="0" Background="#FF333333" PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown" Grid.RowSpan="2" d:IsLocked="True">
+        <Grid Margin="0" Background="#FF333333" PreviewMouseLeftButtonDown="Window_PreviewMouseLeftButtonDown" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="51"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Left" Margin="10,9,0,9" VerticalAlignment="Top" CornerRadius="50" d:IsLocked="True">
-                <Image Height="33" Width="33" Source="Images/email.png" Stretch="None" d:IsLocked="True"/>
+            <Border BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Left" Margin="10,9,0,9" VerticalAlignment="Top" CornerRadius="50">
+                <Image Height="33" Width="33" Source="Images/email.png" Stretch="None"/>
             </Border>
-            <Label Content="Log Mail" HorizontalAlignment="Right" Margin="0,0,9,0" VerticalAlignment="Center" Foreground="White" FontSize="20" FontFamily="MS PGothic" SnapsToDevicePixels="True" d:IsLocked="True"/>
-            <Border x:Name="FocusBackgroundPanel" Grid.Row="1" VerticalAlignment="Top" Margin="0" BorderBrush="Black" d:IsLocked="True">
-                <Grid Width="155" Height="40" Background="#FF666666" d:IsLocked="True">
+            <Label Content="Log Mail" HorizontalAlignment="Right" Margin="0,0,9,0" VerticalAlignment="Center" Foreground="White" FontSize="20" FontFamily="MS PGothic" SnapsToDevicePixels="True"/>
+            <Border x:Name="FocusBackgroundPanel" Grid.Row="1" VerticalAlignment="Top" Margin="0" BorderBrush="Black">
+                <Grid Width="155" Height="40" Background="#FF666666">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="8"/>
                     </Grid.ColumnDefinitions>
-                    <Path Grid.Column="1" Data="M8,14 L0,20 L8,26 Z" Fill="#FFEEEEEE" d:IsLocked="True" />
+                    <Path Grid.Column="1" Data="M8,14 L0,20 L8,26 Z" Fill="#FFEEEEEE" />
                 </Grid>
             </Border>
-            <Grid Margin="0" Grid.Row="1" d:IsLocked="True" >
+            <Grid Margin="0" Grid.Row="1" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="40"/>
@@ -47,7 +47,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
-                <Button x:Name="btnNew" PreviewMouseLeftButtonDown="TabButton_PreviewMouseLeftButtonDown" Tag="0" d:IsLocked="True">
+                <Button x:Name="btnNew" PreviewMouseLeftButtonDown="TabButton_PreviewMouseLeftButtonDown" Tag="0">
                     <Button.Template>
                         <ControlTemplate>
                             <Grid Background="#0C575757">
@@ -61,7 +61,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button x:Name="btnSetting" Grid.Row="1" PreviewMouseLeftButtonDown="TabButton_PreviewMouseLeftButtonDown" Tag="40" d:IsLocked="True">
+                <Button x:Name="btnSetting" Grid.Row="1" PreviewMouseLeftButtonDown="TabButton_PreviewMouseLeftButtonDown" Tag="40">
                     <Button.Template>
                         <ControlTemplate>
                             <Grid Background="#0C575757">
@@ -75,7 +75,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button x:Name="btnAbout" Grid.Row="2" PreviewMouseLeftButtonDown="TabButton_PreviewMouseLeftButtonDown" Tag="80" d:IsLocked="True">
+                <Button x:Name="btnAbout" Grid.Row="2" PreviewMouseLeftButtonDown="TabButton_PreviewMouseLeftButtonDown" Tag="80">
                     <Button.Template>
                         <ControlTemplate>
                             <Grid Background="#0C575757">
@@ -89,7 +89,7 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button x:Name="btnDelete" Grid.Row="4" PreviewMouseLeftButtonDown="btnDelete_PreviewMouseLeftButtonDown" d:IsLocked="True">
+                <Button x:Name="btnDelete" Grid.Row="4" PreviewMouseLeftButtonDown="btnDelete_PreviewMouseLeftButtonDown">
                     <Button.Template>
                         <ControlTemplate>
                             <Border Background="#FFCF2A27">
@@ -100,23 +100,23 @@
                 </Button>
             </Grid>
         </Grid>
-        <Grid x:Name="EditorPanel" Grid.Column="1" Grid.RowSpan="2" Margin="0" MouseWheel="EditorPanel_MouseWheel" d:IsLocked="True">
+        <Grid x:Name="EditorPanel" Grid.Column="1" Grid.RowSpan="2" Margin="0" MouseWheel="EditorPanel_MouseWheel">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="115"/>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="gdContent" Grid.Column="0" Margin="0" d:IsLocked="True">
+            <Grid x:Name="gdContent" Grid.Column="0" Margin="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="31" />
                     <RowDefinition Height="20" />
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="1" Margin="0" BorderThickness="0,0,0,1" BorderBrush="#FFDDDDDD" d:IsLocked="True" >
-                    <TextBlock TextWrapping="Wrap" Text="{Binding NewPanelDataContext.SelectedDate, StringFormat=\{0:D\}}" Foreground="#FFACA4A4" Height="16" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="33,0,0,0" d:IsLocked="True"/>
+                <Border Grid.Row="1" Margin="0" BorderThickness="0,0,0,1" BorderBrush="#FFDDDDDD" >
+                    <TextBlock TextWrapping="Wrap" Text="{Binding NewPanelDataContext.SelectedDate, StringFormat=\{0:D\}}" Foreground="#FFACA4A4" Height="16" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="33,0,0,0"/>
                 </Border>
-                <TextBox Grid.Row="2" x:Name="txtLogContent" Margin="30,10" BorderThickness="0" Background="#FFEEEEEE" SelectionBrush="#FFB2B2B2" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" GotFocus="TextBox_LogContent_GotFocus" LostFocus="TextBox_LogContent_LostFocus" Text="{Binding NewPanelDataContext.LogContent, Mode=TwoWay}" AutoWordSelection="True" PreviewKeyDown="TextBox_LogContent_PreviewKeyDown" d:IsLocked="True"/>
-                <Button Grid.Row="3" x:Name="btnSave" Visibility="Hidden" d:IsLocked="True">
+                <TextBox Grid.Row="2" x:Name="txtLogContent" Margin="30,10" BorderThickness="0" Background="#FFEEEEEE" SelectionBrush="#FFB2B2B2" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto" GotFocus="TextBox_LogContent_GotFocus" LostFocus="TextBox_LogContent_LostFocus" Text="{Binding NewPanelDataContext.LogContent, Mode=TwoWay, NotifyOnTargetUpdated=True, NotifyOnSourceUpdated=True}" AutoWordSelection="True" />
+                <Button Grid.Row="3" x:Name="btnSave" Visibility="Hidden" Command="ApplicationCommands.Undo" CommandTarget="{Binding ElementName=txtLogContent}" PreviewMouseLeftButtonDown="btnSave_PreviewMouseLeftButtonDown">
                     <Button.Template>
                         <ControlTemplate>
                             <Border>
@@ -134,93 +134,93 @@
                     </Button.Template>
                 </Button>
             </Grid>
-            <Grid Grid.Column="1" Background="#FFDDDDDD" d:IsLocked="True">
-                <StackPanel x:Name="DatePicker" VerticalAlignment="Center" d:IsLocked="True">
-                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=0, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=0, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" d:IsLocked="True" />
-                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=1, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=1, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" d:IsLocked="True" />
-                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=2, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=2, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" d:IsLocked="True" />
-                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=3, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=3, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" d:IsLocked="True" />
-                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=4, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=4, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" d:IsLocked="True" />
-                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=5, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=5, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" d:IsLocked="True" />
-                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=6, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=6, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" d:IsLocked="True" />
+            <Grid Grid.Column="1" Background="#FFDDDDDD">
+                <StackPanel x:Name="DatePicker" VerticalAlignment="Center">
+                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=0, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=0, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=1, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=1, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=2, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=2, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=3, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=3, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=4, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=4, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=5, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=5, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding NewPanelDataContext.LogDate, ConverterParameter=6, Converter={StaticResource DateTimeToString}}" TextAlignment="Center" Margin="0,10,0,10" FontFamily="MS PGothic" PreviewMouseLeftButtonDown="TextBlock_Date_PreviewMouseLeftButtonDown" Tag="{Binding NewPanelDataContext.LogDate, ConverterParameter=6, Converter={StaticResource DateToShortString}}" Background="#FFDDDDDD" />
                 </StackPanel>
             </Grid>
         </Grid>
-        <Grid x:Name="SettingPanel" Grid.Column="1" Grid.RowSpan="2" Margin="0" d:IsHidden="True" d:IsLocked="True">
-            <StackPanel Margin="30,55,30,0" d:IsLocked="True">
-                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" Height="30" d:IsLocked="True">
-                    <Grid d:IsLocked="True">
+        <Grid x:Name="SettingPanel" Grid.Column="1" Grid.RowSpan="2" Margin="0" d:IsHidden="True">
+            <StackPanel Margin="30,55,30,0">
+                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" Height="30">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.EmailTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Center" d:IsLocked="True"/>
-                        <TextBox Grid.Column="1" Margin="5,0,15,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.Email, Mode=TwoWay}" VerticalAlignment="Center" Tag="" GotFocus="TextBox_Setting_GotFocus" LostFocus="TextBox_Setting_LostFocus" d:IsLocked="True"/>
+                        <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.EmailTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Margin="5,0,15,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.Email, Mode=TwoWay}" VerticalAlignment="Center" Tag="" GotFocus="TextBox_Setting_GotFocus" LostFocus="TextBox_Setting_LostFocus"/>
                     </Grid>
                 </Border>
-                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" Height="30" d:IsLocked="True">
-                    <Grid d:IsLocked="True">
+                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" Height="30">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.PasswordTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Center" d:IsLocked="True"/>
-                        <TextBox Grid.Column="1" Margin="5,0,15,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.Password, Mode=TwoWay}" VerticalAlignment="Center" d:IsLocked="True"/>
+                        <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.PasswordTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Margin="5,0,15,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.Password, Mode=TwoWay}" VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
-                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" Height="30" d:IsLocked="True">
-                    <Grid d:IsLocked="True">
+                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" Height="30">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.SmtpTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Center" d:IsLocked="True"/>
-                        <TextBox Grid.Column="1" Margin="5,0,15,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.Smtp, Mode=TwoWay}" VerticalAlignment="Center" d:IsLocked="True"/>
+                        <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.SmtpTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Margin="5,0,15,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.Smtp, Mode=TwoWay}" VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
-                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" Height="30" d:IsLocked="True">
-                    <Grid d:IsLocked="True">
+                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" Height="30">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.ToTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Center" d:IsLocked="True"/>
-                        <TextBox Grid.Column="1" Margin="5,0,15,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.To, Mode=TwoWay}" VerticalAlignment="Center" d:IsLocked="True"/>
+                        <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.ToTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Margin="5,0,15,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.To, Mode=TwoWay}" VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
-                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" Height="30" d:IsLocked="True">
-                    <Grid d:IsLocked="True">
+                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" Height="30">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.WithTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Center" d:IsLocked="True"/>
-                        <TextBox Grid.Column="1" Margin="5,0,15,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.With, Mode=TwoWay}" VerticalAlignment="Center" d:IsLocked="True"/>
+                        <TextBlock Margin="0,0,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.WithTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Margin="5,0,15,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.With, Mode=TwoWay}" VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
-                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" Margin="0" d:IsLocked="True">
-                    <Grid d:IsLocked="True">
+                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" Margin="0">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Margin="0,6,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.EmptyTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Top" d:IsLocked="True"/>
-                        <TextBox Grid.Column="1" Margin="5,4,15,4" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.Empty, Mode=TwoWay}" VerticalAlignment="Center" Height="66" d:IsLocked="True"/>
+                        <TextBlock Margin="0,6,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.EmptyTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                        <TextBox Grid.Column="1" Margin="5,4,15,4" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.Empty, Mode=TwoWay}" VerticalAlignment="Center" Height="66"/>
                     </Grid>
                 </Border>
-                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1" d:IsLocked="True">
-                    <Grid d:IsLocked="True">
+                <Border BorderBrush="#FFDDDDDD" BorderThickness="0,0,0,1">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Margin="0,6,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.DirTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Top" d:IsLocked="True"/>
-                        <TextBox Grid.Column="1" Margin="5,4,15,4" TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding SettingPanelDataContext.Dir, Mode=TwoWay}" Height="66" IsReadOnly="True" Background="#FFDDDDDD" d:IsLocked="True"/>
+                        <TextBlock Margin="0,6,10,0" TextWrapping="Wrap" Text="{Binding SettingPanelDataContext.DirTitleText, Mode=OneWay}" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                        <TextBox Grid.Column="1" Margin="5,4,15,4" TextWrapping="Wrap" VerticalAlignment="Center" Text="{Binding SettingPanelDataContext.Dir, Mode=TwoWay}" Height="66" IsReadOnly="True" Background="#FFDDDDDD"/>
                     </Grid>
                 </Border>
             </StackPanel>
         </Grid>
-        <Image Grid.Column="1" Width="12" Height="12" HorizontalAlignment="Right" PreviewMouseLeftButtonDown="Image_Close_PreviewMouseLeftButtonDown" Source="Images/close.png" VerticalAlignment="Center" Margin="0,0,7,0" d:IsLocked="True">
+        <Image Grid.Column="1" Width="12" Height="12" HorizontalAlignment="Right" PreviewMouseLeftButtonDown="Image_Close_PreviewMouseLeftButtonDown" Source="Images/close.png" VerticalAlignment="Center" Margin="0,0,7,0">
             <Image.Effect>
                 <DropShadowEffect BlurRadius="6" Direction="271" ShadowDepth="0" Color="#FF636363"/>
             </Image.Effect>

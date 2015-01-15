@@ -11,11 +11,11 @@ namespace LogMailApp.Storage
         /// <summary>
         /// 日志主键标识
         /// </summary>
-        string Key { get; set; }
+        string PrimaryKey { get; set; }
         /// <summary>
         /// 日志内容
         /// </summary>
-        string[] Content { get; set; }
+        string Content { get; set; }
         /// <summary>
         /// 归档
         /// </summary>

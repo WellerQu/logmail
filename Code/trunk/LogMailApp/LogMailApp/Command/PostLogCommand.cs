@@ -11,6 +11,9 @@ namespace LogMailApp.Command
     class PostLogCommand : CommandBase
     {
         private const string APPSETTINGS_KEY = "communication";
+
+        public const string USER_DATA_CONTENT_KEY = "Post.Content";
+
         private UserData UserData;
 
         public PostLogCommand(UserData userData)

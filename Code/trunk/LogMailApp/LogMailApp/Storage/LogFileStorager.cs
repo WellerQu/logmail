@@ -10,19 +10,36 @@ namespace LogMailApp.Storage
 {
     class LogFileStorager : IStorager
     {
+        public LogFileStorager()
+        {
+            string currentDayLog = string.Format("{0}{1}", DateTime.Now.ToString("yyyy-MM-dd"), FILE_EXTEND);
+            currentDayLog = Path.Combine(UserDefault.Instance.StartupPath, currentDayLog);
+
+            FileInfo file = new FileInfo(currentDayLog);
+            if (!file.Exists)
+            {
+                using (FileStream fs = file.Create())
+                {
+                    fs.Close();
+                }
+            }
+        }
+
         private const string FILE_EXTEND = ".lma";
 
         #region IStorager 成员
-        public string Key { get; set; } // 示例: 2015-01-13
+        public string PrimaryKey { get; set; } // 示例: 2015-01-13
 
-        public string[] Content { get; set; }
+        public string Content { get; set; }
 
         public void File()
         {
-            string fileDirPath = string.Format("./{0}/",
+            string fileDirPath = Path.Combine(
+                UserDefault.Instance.StartupPath,
                 UserDefault.Instance.DirectoryPath.TrimEnd('/', '\\'));
 
-            DirectoryInfo dir = new DirectoryInfo("./");
+            DirectoryInfo dir = new DirectoryInfo(UserDefault.Instance.StartupPath);
+
             FileInfo[] files = dir.GetFiles("*" + FILE_EXTEND, SearchOption.TopDirectoryOnly);
             if (files != null)
             {
@@ -41,8 +58,7 @@ namespace LogMailApp.Storage
                         // 0 year
                         // 1 month
                         // 2 day
-                        // 依此检查目录是否存在, 这和Java不一样, 需要手动检查
-                        for (int i = 0; i < fileNameParts.Length; i++)
+                        for (int i = 0; i < fileNameParts.Length - 1; i++)
                         {
                             dirName = Path.Combine(dirName, fileNameParts[i]);
                             if (Directory.Exists(dirName))
@@ -61,48 +77,41 @@ namespace LogMailApp.Storage
 
         public void Load()
         {
-            FileInfo file = this.Parse(this.Key);
+            FileInfo file = this.Parse(this.PrimaryKey);
             if (file.Exists)
-                this.Content = System.IO.File.ReadAllLines(file.FullName, Encoding.UTF8);
+                this.Content = System.IO.File.ReadAllText(file.FullName, Encoding.UTF8);
         }
 
         public void Delete()
         {
-            FileInfo file = this.Parse(this.Key);
+            FileInfo file = this.Parse(this.PrimaryKey);
             if (file.Exists)
                 file.Delete();
         }
 
         public void Save()
         {
-            FileInfo file = this.Parse(this.Key);
+            FileInfo file = this.Parse(this.PrimaryKey);
             FileStream fs = null;
-            StreamWriter sw = null;
+
             try
             {
-                fs = file.Open(FileMode.Create, FileAccess.Write);
-                sw = new StreamWriter(fs, Encoding.UTF8);
-                if (this.Content != null)
+                using (fs = file.Open(FileMode.Create, FileAccess.ReadWrite, FileShare.Read))
                 {
-                    foreach (var line in this.Content)
+                    if (this.Content != null)
                     {
-                        sw.WriteLine(line);
+                        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(this.Content);
+                        fs.Write(buffer, 0, buffer.Length);
+                        fs.Flush();
                     }
                 }
-                sw.Flush();
-                fs.Flush();
             }
-            finally
+#if DEBUG
+            catch (System.Exception ex)
             {
-                if (sw != null)
-                {
-                    sw.Close();
-                }
-                if (fs != null)
-                {
-                    fs.Close();
-                }
+
             }
+#endif
         }
 
         #endregion
@@ -110,15 +119,21 @@ namespace LogMailApp.Storage
         private FileInfo Parse(string fileName)
         {
             FileInfo file = null;
-            string filePath = string.Format("./{0}", fileName);
-            if (System.IO.File.Exists(filePath))
+
+            string filePath = string.Format("{0}{1}", fileName, FILE_EXTEND);
+            string unFileLogPath = Path.Combine(UserDefault.Instance.StartupPath, filePath);
+            if (System.IO.File.Exists(unFileLogPath))
             {
-                file = new FileInfo(filePath);
+                // 解析未归档的日志
+                file = new FileInfo(unFileLogPath);
             }
             else
             {
-                filePath = string.Format("./{0}/",
+                // 仅解析已归档日志
+                filePath = Path.Combine(
+                    UserDefault.Instance.StartupPath,
                     UserDefault.Instance.DirectoryPath.TrimEnd('/', '\\'));
+
                 string[] fileNamePart = fileName.Split('-');
 
                 for (int i = 0; i < fileNamePart.Length; i++)
@@ -128,6 +143,7 @@ namespace LogMailApp.Storage
 
                 file = new FileInfo(filePath + FILE_EXTEND);
             }
+
             return file;
         }
     }

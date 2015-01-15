@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -22,9 +23,7 @@ namespace LogMailApp.Preference
             if (null == Instance.PreferenceDoc)
                 Instance.PreferenceDoc = new XmlDocument();
 
-            //Console.WriteLine("Hello UserDefault: {0}", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PREFERENCEXML_NAME));
-
-            Instance.PreferenceDoc.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, PREFERENCEXML_NAME));
+            Instance.PreferenceDoc.Load(Path.Combine(UserDefault.startupPath, PREFERENCEXML_NAME));
         }
 
         protected UserDefault()
@@ -50,7 +49,16 @@ namespace LogMailApp.Preference
         #endregion
 
         private XmlDocument PreferenceDoc = null;
+        private static readonly String startupPath = AppDomain.CurrentDomain.BaseDirectory;//System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
         public static UserDefault Instance { get; protected set; }
+
+        public string StartupPath
+        {
+            get
+            {
+                return UserDefault.startupPath;
+            }
+        }
 
         public bool IsFirstUsing
         {

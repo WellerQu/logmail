@@ -9,7 +9,7 @@ using LogMailApp.Properties;
 
 namespace LogMailApp.VM
 {
-    class VMSettingPanel : ViewModel
+    class VMSettingPanel : ViewModelBase
     {
         public VMSettingPanel()
         {
@@ -103,7 +103,7 @@ namespace LogMailApp.VM
         {
             get
             {
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UserDefault.Instance.DirectoryPath);
+                return Path.Combine(UserDefault.Instance.StartupPath, UserDefault.Instance.DirectoryPath);
             }
             set
             {

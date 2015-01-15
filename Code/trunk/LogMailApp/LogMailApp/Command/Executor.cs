@@ -27,6 +27,8 @@ namespace LogMailApp.Command
                         cmd.Execute(null);
                     }
                 }
+
+                Console.WriteLine("All commands are executed.");
             }
         }
     }

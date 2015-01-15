@@ -76,9 +76,40 @@ namespace LogMailApp
             this.DragMove();
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        private void Image_Close_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            App.Current.Shutdown(0);
+            #region 窗口退出动画
+            Duration duration = new Duration(TimeSpan.FromMilliseconds(300));
+
+            Storyboard sb = new Storyboard();
+
+            DoubleAnimation toMove = new DoubleAnimation();
+            toMove.Duration = duration;
+            toMove.From = this.Top;
+            toMove.To = this.Top - 20;
+            Storyboard.SetTargetProperty(toMove, new PropertyPath("Top"));
+
+            DoubleAnimation toOpacity = new DoubleAnimation();
+            toOpacity.Duration = duration;
+            toOpacity.From = 1;
+            toOpacity.To = 0;
+            Storyboard.SetTargetProperty(toOpacity, new PropertyPath("Opacity"));
+
+            sb.Children.Add(toMove);
+            sb.Children.Add(toOpacity);
+            sb.Completed += (object window, EventArgs evt) =>
+            {
+                this.Close();
+            };
+
+            this.BeginStoryboard(sb);
+            #endregion
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+                Image_Close_PreviewMouseLeftButtonDown(sender, null);
         }
     }
 }

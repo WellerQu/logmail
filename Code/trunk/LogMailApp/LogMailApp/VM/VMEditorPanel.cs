@@ -10,7 +10,7 @@ using LogMailApp.Properties;
 
 namespace LogMailApp.VM
 {
-    class VMEditorPanel : ViewModel
+    class VMEditorPanel : ViewModelBase
     {
         public VMEditorPanel()
         {

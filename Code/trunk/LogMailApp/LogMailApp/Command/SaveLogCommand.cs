@@ -14,7 +14,7 @@ namespace LogMailApp.Command
             if (this.ViewModel != null)
             {
                 string name = this.ViewModel.SelectedDate.Value.ToString("yyyy-MM-dd");
-                string[] content = this.ViewModel.LogContent.Split('\r', '\n');
+                string content = this.ViewModel.LogContent;
 
                 LogDocument doc = new LogDocument();
                 doc.Save(name, content);

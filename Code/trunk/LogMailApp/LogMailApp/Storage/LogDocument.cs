@@ -20,9 +20,9 @@ namespace LogMailApp.Storage
             this.Storager.File();
         }
 
-        public void Save(string name, string[] content)
+        public void Save(string name, string content)
         {
-            this.Storager.Key = name;
+            this.Storager.PrimaryKey = name;
             this.Storager.Content = content;
 
             this.Storager.Save();   // 保存
@@ -30,13 +30,13 @@ namespace LogMailApp.Storage
 
         public void Delete(string name)
         {
-            this.Storager.Key = name;
+            this.Storager.PrimaryKey = name;
             this.Storager.Delete();
         }
 
-        public string[] Load(string name)
+        public string Load(string name)
         {
-            this.Storager.Key = name;
+            this.Storager.PrimaryKey = name;
             this.Storager.Load();
 
             return this.Storager.Content;

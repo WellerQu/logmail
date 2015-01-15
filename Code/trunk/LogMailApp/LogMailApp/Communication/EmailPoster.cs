@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using LogMailApp.Preference;
 using LogMailApp.Exception;
 using LogMailApp.Properties;
+using LogMailApp.Command;
 
 namespace LogMailApp.Communication
 {
@@ -26,10 +27,6 @@ namespace LogMailApp.Communication
         private SmtpClient Client = null;
         private MailMessage Message = null;
 
-        private const string USER_DATA_CONTENT_KEY = "Mail.Content";
-        private const string USER_DATA_EMAIL_KEY = "Mail.Address";
-        private const string USER_DATA_PWD_KEY = "Mail.Password";
-
         #region IPoster 成员
 
         public bool WillStopOnError
@@ -39,7 +36,7 @@ namespace LogMailApp.Communication
 
         public virtual void Post(UserData userData)
         {
-            string[] content = userData[USER_DATA_CONTENT_KEY] as string[];
+            string[] content = userData[PostLogCommand.USER_DATA_CONTENT_KEY] as string[];
             
             if (content == null)
             {
@@ -56,8 +53,8 @@ namespace LogMailApp.Communication
             this.Message.Subject = UserDefault.Instance.Subject;
             this.Message.Body = sbContent.ToString();
 
-            string userName = userData[USER_DATA_EMAIL_KEY] as string;
-            string password = userData[USER_DATA_PWD_KEY] as string;
+            string userName = UserDefault.Instance.Email;
+            string password = UserDefault.Instance.Password;
 
             this.Client.Credentials = new System.Net.NetworkCredential(userName, password);
             this.Client.Send(this.Message);

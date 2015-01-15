@@ -12,8 +12,9 @@ namespace LogMailApp.Command
     /// </summary>
     class AppendLogCommand : CommandBase
     {
-        public const string LOG_NAME_KEY = "Log.Key";
+        public const string LOG_NAME_KEY = "Log.PrimaryKey";
         public const string LOG_CONT_KEY = "Log.Content";
+
         private UserData UserData = null;
 
         public AppendLogCommand(UserData userData)
@@ -26,17 +27,16 @@ namespace LogMailApp.Command
             string name = this.UserData[LOG_NAME_KEY] as string;
             string cont = this.UserData[LOG_CONT_KEY] as string;
 
-            List<string> lines = new List<string>();
-
             LogDocument doc = new LogDocument();
+            string content = doc.Load(name);
 
-            string[] content = doc.Load(name);
-            if (content != null)
-                lines.AddRange(content);
+            StringBuilder sbContent = new StringBuilder(content);
+            if (!string.IsNullOrEmpty(content))
+                content += Environment.NewLine + cont;
+            else
+                content = cont;
 
-            lines.Add(cont);
-
-            doc.Save(name, lines.ToArray());
+            doc.Save(name, content);
         }
     }
 }

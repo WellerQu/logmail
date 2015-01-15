@@ -7,7 +7,7 @@ using LogMailApp.Properties;
 
 namespace LogMailApp.VM
 {
-    class VMMainWindow : ViewModel
+    class VMMainWindow : ViewModelBase
     {
         public VMMainWindow()
         {

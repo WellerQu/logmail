@@ -25,7 +25,7 @@ namespace LogMailApp.Command
         {
             App app = new App();
 
-            app.MainWindow = new MainWindow(UserDefault.Instance.IsFirstUsing);
+            app.MainWindow = new MainWindow();
 
             if (this.UserData != null && this.UserData[WIN_CONT_KEY] != null)
             {

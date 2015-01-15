@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;DEBUG_UI</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -81,13 +81,14 @@
     <Compile Include="Converter\DateToShortStringConverter.cs" />
     <Compile Include="Exception\EmailContentNullException.cs" />
     <Compile Include="Exception\ExceptionBase.cs" />
+    <Compile Include="Exception\UndefinedCommandException.cs" />
     <Compile Include="Preference\UserDefault.cs" />
     <Compile Include="Storage\LogFileStorager.cs" />
     <Compile Include="Storage\IStorager.cs" />
     <Compile Include="Storage\LogDocument.cs" />
     <Compile Include="Storage\StoragerFactory.cs" />
     <Compile Include="UserData.cs" />
-    <Compile Include="VM\ViewModel.cs" />
+    <Compile Include="VM\ViewModelBase.cs" />
     <Compile Include="VM\VMAboutPanel.cs" />
     <Compile Include="VM\VMMainWindow.cs" />
     <Compile Include="VM\VMEditorPanel.cs" />

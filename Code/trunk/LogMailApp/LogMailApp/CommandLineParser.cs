@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LogMailApp.Command;
+using LogMailApp.Exception;
 
 namespace LogMailApp
 {
@@ -15,31 +16,36 @@ namespace LogMailApp
     {
         public CommandLineParser(string[] args)
         {
-            // -f -p -a -ui -d
+            // -f -p -a -ui
             List<CommandBase> commands = new List<CommandBase>();
             Stack<string> stack = new Stack<string>();
 
             foreach (string str in args)
             {
-                if (str.StartsWith("-"))
+                if (!string.IsNullOrEmpty(str.Trim()))
                 {
-                    // 是命令就入栈
-                    stack.Push(str);
-                }
-                else
-                {
-                    // 是参数把命令就出栈
-                    string cmdName = stack.Pop();
-                    string parameter = str;
+                    Console.WriteLine("params: " + str);
 
-                    CommandBase cmd = this.CreateCommand(cmdName, parameter);
+                    if (str.StartsWith("-"))
+                    {
+                        // 是命令就入栈
+                        stack.Push(str);
+                    }
+                    else
+                    {
+                        // 是参数把命令就出栈
+                        string cmdName = stack.Pop();
+                        string parameter = str;
 
-                    if (cmd != null)
-                        commands.Add(cmd);
+                        CommandBase cmd = this.CreateCommand(cmdName, parameter);
+
+                        if (cmd != null)
+                            commands.Add(cmd);
+                    }
                 }
             }
 
-            while (stack.Count > 0)
+            while (stack != null && stack.Count > 0)
             {
                 // 剩下的都是无参数的构造函数
                 string cmdName = stack.Pop();
@@ -50,6 +56,8 @@ namespace LogMailApp
             }
 
             this.Commands = commands.OrderBy(obj => obj.Order).ToArray();
+
+            Console.WriteLine("Collect all the commands!");
         }
 
         public CommandBase[] Commands { get; protected set; }
@@ -65,14 +73,26 @@ namespace LogMailApp
                 userData[AppendLogCommand.LOG_CONT_KEY] = paramter;
 
                 cmd = new AppendLogCommand(userData);
+                cmd.Order = 0;
             }
             else if ("-p".Equals(name))
             {
-
+                cmd = new PostLogCommand(null);
+                cmd.Order = 1;
+            }
+            else if ("-f".Equals(name))
+            {
+                cmd = new FileLogCommand();
+                cmd.Order = 2;
             }
             else if ("-ui".Equals(name))
             {
                 cmd = new UICommand(null);
+                cmd.Order = 3;
+            }
+            else
+            {
+                throw new UndefinedCommandException("出现没有定义的参数: " + name);
             }
 
             return cmd;
