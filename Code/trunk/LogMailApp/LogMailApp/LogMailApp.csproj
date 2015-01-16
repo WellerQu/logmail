@@ -152,6 +152,7 @@
   <ItemGroup>
     <None Include="Preference\Preference.plist">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

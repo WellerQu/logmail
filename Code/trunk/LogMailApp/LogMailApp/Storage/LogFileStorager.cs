@@ -12,10 +12,9 @@ namespace LogMailApp.Storage
     {
         public LogFileStorager()
         {
-            string currentDayLog = string.Format("{0}{1}", DateTime.Now.ToString("yyyy-MM-dd"), FILE_EXTEND);
-            currentDayLog = Path.Combine(UserDefault.Instance.StartupPath, currentDayLog);
+            string currentDayLogKey = DateTime.Now.ToString("yyyy-MM-dd");
 
-            FileInfo file = new FileInfo(currentDayLog);
+            FileInfo file = this.Parse(currentDayLogKey);
             if (!file.Exists)
             {
                 using (FileStream fs = file.Create())
