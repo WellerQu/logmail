@@ -43,16 +43,14 @@ namespace LogMailApp.Storage
             FileInfo[] files = dir.GetFiles("*" + FILE_EXTEND, SearchOption.TopDirectoryOnly);
             if (files != null)
             {
-                string fileName = null;
-                string[] fileNameParts = null;
-                string dirName = fileDirPath;   // 初始为 ./MyLogs/
-
                 foreach (FileInfo f in files)
                 {
-                    fileName = f.Name.Replace(FILE_EXTEND, string.Empty);
+                    string dirName = fileDirPath;   // 初始为 ./MyLogs/
+
+                    string fileName = f.Name.Replace(FILE_EXTEND, string.Empty);
                     // 按照约定, 文件名应该为 yyyy-MM-dd.lma
                     // 所以...
-                    fileNameParts = fileName.Split('-');
+                    string[] fileNameParts = fileName.Split('-');
                     if (fileNameParts != null && fileNameParts.Length == 3)
                     {
                         // 0 year
