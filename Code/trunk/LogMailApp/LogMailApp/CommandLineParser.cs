@@ -16,6 +16,49 @@ namespace LogMailApp
     {
         public CommandLineParser(string[] args)
         {
+            this.Commands = this.Parse(args);
+        }
+
+        public CommandBase[] Commands { get; private set; }
+
+        protected virtual CommandBase CreateCommand(string name, string paramter)
+        {
+            CommandBase cmd = null;
+            UserData userData = new UserData();
+
+            if ("-a".Equals(name))
+            {
+                userData[AppendLogCommand.LOG_NAME_KEY] = DateTime.Now.ToString("yyyy-MM-dd");
+                userData[AppendLogCommand.LOG_CONT_KEY] = paramter;
+
+                cmd = new AppendLogCommand(userData);
+                cmd.Order = 0;
+            }
+            else if ("-p".Equals(name))
+            {
+                cmd = new PostLogCommand(null);
+                cmd.Order = 1;
+            }
+            else if ("-f".Equals(name))
+            {
+                cmd = new FileLogCommand();
+                cmd.Order = 2;
+            }
+            else if ("-ui".Equals(name))
+            {
+                cmd = new UICommand(null);
+                cmd.Order = 3;
+            }
+            else
+            {
+                throw new UndefinedCommandException("出现没有定义的参数: " + name);
+            }
+
+            return cmd;
+        }
+
+        protected virtual CommandBase[] Parse(string[] args)
+        {
             // -f -p -a -ui
             List<CommandBase> commands = new List<CommandBase>();
             Stack<string> stack = new Stack<string>();
@@ -55,47 +98,9 @@ namespace LogMailApp
                     commands.Add(cmd);
             }
 
-            this.Commands = commands.OrderBy(obj => obj.Order).ToArray();
-
             Console.WriteLine("Collect all the commands!");
-        }
 
-        public CommandBase[] Commands { get; protected set; }
-
-        protected virtual CommandBase CreateCommand(string name, string paramter)
-        {
-            CommandBase cmd = null;
-            UserData userData = new UserData();
-
-            if ("-a".Equals(name))
-            {
-                userData[AppendLogCommand.LOG_NAME_KEY] = DateTime.Now.ToString("yyyy-MM-dd");
-                userData[AppendLogCommand.LOG_CONT_KEY] = paramter;
-
-                cmd = new AppendLogCommand(userData);
-                cmd.Order = 0;
-            }
-            else if ("-p".Equals(name))
-            {
-                cmd = new PostLogCommand(null);
-                cmd.Order = 1;
-            }
-            else if ("-f".Equals(name))
-            {
-                cmd = new FileLogCommand();
-                cmd.Order = 2;
-            }
-            else if ("-ui".Equals(name))
-            {
-                cmd = new UICommand(null);
-                cmd.Order = 3;
-            }
-            else
-            {
-                throw new UndefinedCommandException("出现没有定义的参数: " + name);
-            }
-
-            return cmd;
+            return commands.OrderBy(obj => obj.Order).ToArray();
         }
     }
 }

@@ -1,12 +1,12 @@
-﻿Log Mail
+﻿Log Mail App
+
 -------------------------------
-Version:	1.0.0 beta
+Version:    1.0.0 beta
 Thanks To:	
 -------------------------------
-Developer:		Weller Qu
-UI Designer:	Weller Qu
-				& Caixia Zhang
-Test:			Weller Qu
+Developer:     Weller Qu
+UI Designer:   Weller Qu & Caixia Zhang
+Test:          Weller Qu
 
 #'#'表示本行不会出现在About面板中
 #已存在的条件编译符号
@@ -14,7 +14,7 @@ Test:			Weller Qu
 #DEBUG_FirstUsing	调试首次使用
 
 Usage:
- -a		append a line to log
- -p		post all unfile logs
- -f		file all unfile logs
- -ui	open the window
+ -a   append a line to log
+ -p   post all unfile logs
+ -f   file all unfile logs
+ -ui  open the window

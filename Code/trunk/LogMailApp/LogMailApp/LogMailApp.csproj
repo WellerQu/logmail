@@ -37,8 +37,7 @@
     <StartupObject>LogMailApp.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>Images\32x32 LOGO.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -81,7 +80,9 @@
     <Compile Include="Converter\DateToShortStringConverter.cs" />
     <Compile Include="Exception\EmailContentNullException.cs" />
     <Compile Include="Exception\ExceptionBase.cs" />
+    <Compile Include="Exception\PostErrorException.cs" />
     <Compile Include="Exception\UndefinedCommandException.cs" />
+    <Compile Include="Exception\UserInformationDeficiencyException.cs" />
     <Compile Include="Preference\UserDefault.cs" />
     <Compile Include="Storage\LogFileStorager.cs" />
     <Compile Include="Storage\IStorager.cs" />
@@ -157,7 +158,6 @@
     <Resource Include="Images\about.png" />
     <Resource Include="Images\close.png" />
     <Resource Include="Images\del.png" />
-    <Resource Include="Images\email.png" />
     <Resource Include="Images\save.png" />
   </ItemGroup>
   <ItemGroup>
@@ -165,7 +165,10 @@
     <Resource Include="Images\setting.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\email.ico" />
+    <Resource Include="Images\email.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\32x32 LOGO.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

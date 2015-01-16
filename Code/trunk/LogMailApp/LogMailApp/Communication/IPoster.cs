@@ -9,6 +9,7 @@ namespace LogMailApp.Communication
     interface IPoster
     {
         bool WillStopOnError { get; }
+        void Ready(UserData userData);
         void Post(UserData userData);
     }
 }

@@ -23,7 +23,7 @@ namespace LogMailApp
 
             try
             {
-                if (args.Length == 0)
+                if (args.Length == 0 || UserDefault.Instance.IsFirstUsing)
                 {
                     App app = new App();
                     app.MainWindow = new MainWindow();

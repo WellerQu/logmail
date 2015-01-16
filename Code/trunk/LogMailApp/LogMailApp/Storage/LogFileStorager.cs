@@ -61,15 +61,43 @@ namespace LogMailApp.Storage
                         for (int i = 0; i < fileNameParts.Length - 1; i++)
                         {
                             dirName = Path.Combine(dirName, fileNameParts[i]);
-                            if (Directory.Exists(dirName))
+                            if (!Directory.Exists(dirName))
                             {
                                 // 如果目录不存在, 则创建目录
                                 Directory.CreateDirectory(dirName);
                             }
                         }
 
+                        string dest = Path.Combine(dirName, fileNameParts[2] + FILE_EXTEND);
+
+                        if (System.IO.File.Exists(dest))
+                            System.IO.File.Delete(dest);
+
                         // 移动文件到目标位置, 完成归档, 示例: ./MyLogs/2015/01/15.lma
-                        f.MoveTo(Path.Combine(dirName, fileNameParts[2] + FILE_EXTEND));
+                        f.MoveTo(dest);
+                    }
+                }
+            }
+        }
+
+        public void UnFile(Action<string, string> action)
+        {
+            string[] files = Directory.GetFiles(UserDefault.Instance.StartupPath, "*.lma", SearchOption.TopDirectoryOnly);
+            if (files != null && files.Length > 0)
+            {
+                foreach (string f in files)
+                {
+                    FileInfo file = new FileInfo(f);
+                    using (FileStream fs = file.OpenRead())
+                    {
+                        StreamReader sr = new StreamReader(fs, Encoding.UTF8);
+                        string content = sr.ReadToEnd();
+                        sr.Close();
+
+                        if (string.IsNullOrEmpty(content))
+                            content = UserDefault.Instance.DefaultEmpty;
+
+                        action(file.Name.Replace(FILE_EXTEND, string.Empty), content);
                     }
                 }
             }
@@ -106,12 +134,10 @@ namespace LogMailApp.Storage
                     }
                 }
             }
-#if DEBUG
             catch (System.Exception ex)
             {
-
+                throw ex;
             }
-#endif
         }
 
         #endregion

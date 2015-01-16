@@ -8,6 +8,7 @@ using LogMailApp.Preference;
 using LogMailApp.Exception;
 using LogMailApp.Properties;
 using LogMailApp.Command;
+using LogMailApp.Storage;
 
 namespace LogMailApp.Communication
 {
@@ -18,14 +19,9 @@ namespace LogMailApp.Communication
     {
         public EmailPoster()
         {
-            this.Client = new SmtpClient(UserDefault.Instance.SMTP);
-            this.Client.UseDefaultCredentials = false;
-
-            this.Message = new MailMessage(UserDefault.Instance.Email, UserDefault.Instance.To);
         }
 
         private SmtpClient Client = null;
-        private MailMessage Message = null;
 
         #region IPoster 成员
 
@@ -34,30 +30,68 @@ namespace LogMailApp.Communication
             get { return false; }
         }
 
+        public virtual void Ready(UserData userData)
+        {
+            string userName = UserDefault.Instance.Email;
+            string password = UserDefault.Instance.Password;
+
+            if (string.IsNullOrEmpty(userName))
+            {
+                throw new UserInformationDeficiencyException("电子邮件用户名缺失");
+            }
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new UserInformationDeficiencyException("电子邮件密码缺失");
+            }
+
+            this.Client = new SmtpClient(UserDefault.Instance.SMTP);
+            this.Client.UseDefaultCredentials = false;
+            this.Client.Credentials = new System.Net.NetworkCredential(userName, password);
+        }
+
         public virtual void Post(UserData userData)
         {
-            string[] content = userData[PostLogCommand.USER_DATA_CONTENT_KEY] as string[];
-            
-            if (content == null)
+            LogDocument.Doc[] doc = userData[PostLogCommand.USER_DATA_CONTENT_KEY] as LogDocument.Doc[];
+
+            if (doc == null || doc.Length == 0)
             {
                 throw new EmailContentNullException(Resources.NULL_EXCEPTION_MESSAGE);
             }
 
+            string[] withPeoples = UserDefault.Instance.With.Split(';');    // 抄送目标
+            string[] toPeoples = UserDefault.Instance.To.Split(';');        // 发送目标
+
             StringBuilder sbContent = new StringBuilder();
-            foreach (var line in content)
+
+            foreach (var msg in doc)
             {
-                sbContent.AppendLine(line);
+                sbContent.AppendLine(msg.PrimaryKey);
+                sbContent.AppendLine(msg.Content);
+                sbContent.AppendLine(); // 换行
+                sbContent.AppendLine(); // 换行
             }
-            sbContent.Append(UserDefault.Instance.Footer);
 
-            this.Message.Subject = UserDefault.Instance.Subject;
-            this.Message.Body = sbContent.ToString();
+            sbContent.AppendLine(UserDefault.Instance.Footer);  // 添加小尾巴
 
-            string userName = UserDefault.Instance.Email;
-            string password = UserDefault.Instance.Password;
+            MailMessage message = message = new MailMessage();
+            message.From = new MailAddress(UserDefault.Instance.Email);
 
-            this.Client.Credentials = new System.Net.NetworkCredential(userName, password);
-            this.Client.Send(this.Message);
+            foreach (var to in toPeoples)
+            {
+                if (!string.IsNullOrEmpty(to.Trim()))
+                    message.To.Add(to);
+            }
+
+            foreach (var cc in withPeoples)
+            {
+                if (!string.IsNullOrEmpty(cc.Trim()))
+                    message.CC.Add(cc);
+            }
+
+            message.Subject = UserDefault.Instance.Subject;
+            message.Body = sbContent.ToString();
+
+            this.Client.Send(message);
         }
 
         #endregion

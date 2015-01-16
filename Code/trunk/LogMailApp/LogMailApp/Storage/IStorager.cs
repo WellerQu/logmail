@@ -21,6 +21,12 @@ namespace LogMailApp.Storage
         /// </summary>
         void File();
         /// <summary>
+        /// 决定未归档的日志如何处理
+        /// action将得到name文件名和content内容
+        /// </summary>
+        /// <param name="action">处理过程</param>
+        void UnFile(Action<string, string> action);
+        /// <summary>
         /// 加载
         /// </summary>
         void Load();

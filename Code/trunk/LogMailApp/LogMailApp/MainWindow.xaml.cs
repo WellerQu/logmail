@@ -161,6 +161,7 @@ namespace LogMailApp
                         this.ShowButton(this.btnDelete, this.durationGlobal);
 
                     this.HidePanel(this.SettingPanel, this.durationGlobal);
+                    this.HidePanel(this.AboutPanel, this.durationGlobal);
                     this.ShowPanel(this.EditorPanel, this.durationGlobal);
                 }
                 else if (tag == 40)
@@ -168,11 +169,16 @@ namespace LogMailApp
                     this.HideButton(this.btnDelete, this.durationGlobal);
 
                     this.HidePanel(this.EditorPanel, this.durationGlobal);
+                    this.HidePanel(this.AboutPanel, this.durationGlobal);
                     this.ShowPanel(this.SettingPanel, this.durationGlobal);
                 }
                 else if (tag == 80)
                 {
                     this.HideButton(this.btnDelete, this.durationGlobal);
+
+                    this.HidePanel(this.EditorPanel, this.durationGlobal);
+                    this.HidePanel(this.SettingPanel, this.durationGlobal);
+                    this.ShowPanel(this.AboutPanel, this.durationGlobal);
                 }
             }
         }
@@ -269,12 +275,12 @@ namespace LogMailApp
 
                     if (delta < 0)
                     {
-                        toMargin.From = new Thickness(0, -300, 0, 0);
+                        toMargin.From = new Thickness(0, -35, 0, 0);
                         toMargin.To = new Thickness(0, 0, 0, 0);
                     }
                     else if (delta > 0)
                     {
-                        toMargin.From = new Thickness(0, 300, 0, 0);
+                        toMargin.From = new Thickness(0, 35, 0, 0);
                         toMargin.To = new Thickness(0, 0, 0, 0);
                     }
 

@@ -8,6 +8,12 @@ namespace LogMailApp.Storage
 {
     public class LogDocument
     {
+        public class Doc
+        {
+            public string PrimaryKey { get; set; }
+            public string Content { get; set; }
+        }
+
         public LogDocument()
         {
             this.Storager = StoragerFactory.Create();
@@ -40,6 +46,17 @@ namespace LogMailApp.Storage
             this.Storager.Load();
 
             return this.Storager.Content;
+        }
+
+        public Doc[] GetUnFileDocument()
+        {
+            List<Doc> list = new List<Doc>();
+            this.Storager.UnFile((string name, string content) =>
+            {
+                list.Add(new Doc() { PrimaryKey = name, Content = content });
+            });
+
+            return list.ToArray();
         }
     }
 }

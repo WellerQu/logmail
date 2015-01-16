@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <preference>
   <!-- 首次使用 -->
-  <isFirstUsing>False</isFirstUsing>
+  <isFirstUsing>True</isFirstUsing>
   <!-- SMTP Server -->
   <smtp>smtpcom.263xmail.com</smtp>
   <!-- 发送邮件的Email -->

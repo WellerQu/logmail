@@ -16,21 +16,24 @@ namespace LogMailApp.Communication
         public PosterProduct Next { set; get; }
         private IPoster Poster { get; set; }
 
-        public void Run(UserData userData)
+        public void Run(UserData userData, ref string error)
         {
             try
             {
+                this.Poster.Ready(userData);
                 this.Poster.Post(userData);
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
                 if (this.Poster.WillStopOnError)
-                    throw;
+                    throw ex;
+                else
+                    error += ex.Message + ";";
             }
 
             if (this.Next != null)
             {
-                this.Next.Run(userData);
+                this.Next.Run(userData, ref error);
             }
         }
     }

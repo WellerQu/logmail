@@ -45,7 +45,7 @@ namespace LogMailApp.Preference
         private const string README_NODE_PATH = "preference/readme";
         private const string EMPTY_NODE_PATH = "preference/empty";
         private const string SUBJECT_NODE_PATH = "preference/subject";
-        private const string FOOTER_NODE_PATH = "preference/subject";
+        private const string FOOTER_NODE_PATH = "preference/foot";
         #endregion
 
         private XmlDocument PreferenceDoc = null;
@@ -216,17 +216,28 @@ namespace LogMailApp.Preference
         /// <summary>
         /// 获取README.md文件的内容
         /// </summary>
-        public string[] Readme
+        public string Readme
         {
             get
             {
                 string path = this.PreferenceDoc.SelectSingleNode(README_NODE_PATH).InnerText;
+                path = Path.Combine(this.StartupPath, path);
                 string[] content = File.ReadAllLines(path, Encoding.UTF8);
+                StringBuilder text = new StringBuilder();
 
                 if (content != null)
-                    content = content.Where(obj => !obj.StartsWith("#")).ToArray<string>();
+                {
+                    foreach (string line in content)
+                    {
+                        //content = content.Where(obj => !obj.StartsWith("#")).ToArray<string>();
+                        if (!line.StartsWith("#"))
+                        {
+                            text.AppendLine(line);
+                        }
+                    }
+                }
 
-                return content;
+                return text.ToString();
             }
         }
 
@@ -235,7 +246,7 @@ namespace LogMailApp.Preference
         /// </summary>
         protected void Save()
         {
-            this.PreferenceDoc.Save(PREFERENCEXML_NAME);
+            this.PreferenceDoc.Save(Path.Combine(StartupPath, PREFERENCEXML_NAME));
         }
     }
 }
