@@ -141,30 +141,30 @@ namespace LogMailApp.Storage
 
         private FileInfo Parse(string fileName)
         {
-            FileInfo file = null;
+            string fileRootDirPath = Path.Combine(
+                   UserDefault.Instance.StartupPath,
+                   UserDefault.Instance.DirectoryPath.TrimEnd('/', '\\'));
+            // 获得归档日志根目录, 示例: fileRootDirPath = ./MyLogs
 
-            string filePath = string.Format("{0}{1}", fileName, FILE_EXTEND);
-            string unFileLogPath = Path.Combine(UserDefault.Instance.StartupPath, filePath);
-            if (System.IO.File.Exists(unFileLogPath))
+            // 尝试当作已归档日志解析
+            string[] fileNamePart = fileName.Split('-');
+
+            for (int i = 0; i < fileNamePart.Length - 1; i++)
             {
-                // 解析未归档的日志
-                file = new FileInfo(unFileLogPath);
+                fileRootDirPath = Path.Combine(fileRootDirPath, fileNamePart[i]);
             }
-            else
+            // 示例: fileRootDirPath = ./MyLogs/yyyy/MM
+            string filePath = Path.Combine(fileRootDirPath, fileNamePart[2]);
+            // 获得完整日志文件地址, 示例: ./MyLogs/yyyy/MM/dd
+
+            FileInfo file = new FileInfo(filePath + FILE_EXTEND);
+
+            if (!file.Exists)
             {
-                // 仅解析已归档日志
-                filePath = Path.Combine(
-                    UserDefault.Instance.StartupPath,
-                    UserDefault.Instance.DirectoryPath.TrimEnd('/', '\\'));
-
-                string[] fileNamePart = fileName.Split('-');
-
-                for (int i = 0; i < fileNamePart.Length; i++)
-                {
-                    filePath = Path.Combine(filePath, fileNamePart[i]);
-                }
-
-                file = new FileInfo(filePath + FILE_EXTEND);
+                // 未发现归档日志, 尝试当作未归档的日志解析
+                fileRootDirPath = Path.Combine(UserDefault.Instance.StartupPath, fileName);
+                // 获得完整日志文件地址, 示例: ./MyLogs/yyyy-MM-dd
+                file = new FileInfo(fileRootDirPath + FILE_EXTEND);
             }
 
             return file;
