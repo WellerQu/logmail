@@ -1,7 +1,8 @@
 ﻿Log Mail App
 
+Clone URL: https://github.com/WellerQu/logmail.git
 -------------------------------
-Version:    1.0.0 beta
+Version:    1.0.3 beta
 Thanks To:	
 -------------------------------
 Developer:     Weller Qu
