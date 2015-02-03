@@ -1,4 +1,4 @@
-﻿Log Mail App
+#Log Mail App
 
 Clone URL: https://github.com/WellerQu/logmail.git
 -------------------------------
@@ -9,10 +9,9 @@ Developer:     Weller Qu
 UI Designer:   Weller Qu & Caixia Zhang
 Test:          Weller Qu
 
-#'#'表示本行不会出现在About面板中
-#已存在的条件编译符号
-#DEBUG_UI			调试UI
-#DEBUG_FirstUsing	调试首次使用
+已存在的条件编译符号
+DEBUG_UI			调试UI
+DEBUG_FirstUsing	调试首次使用
 
 Usage:
  -a   append a line to log
