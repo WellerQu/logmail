@@ -30,13 +30,14 @@ namespace LogMailApp.Command
             LogDocument doc = new LogDocument();
             string content = doc.Load(name);
 
-            StringBuilder sbContent = new StringBuilder(content);
-            if (!string.IsNullOrEmpty(content))
-                content += Environment.NewLine + cont;
-            else
-                content = cont;
+            StringBuilder sbContent = new StringBuilder(content.TrimEnd('\r', '\n'));
 
-            doc.Save(name, content);
+            if (!string.IsNullOrEmpty(cont))
+            {
+                sbContent.AppendLine();
+                sbContent.AppendLine(string.Format("{0}[{1}]", cont, DateTime.Now.ToString("HH:mm")));
+                doc.Save(name, sbContent.ToString());
+            }
         }
     }
 }

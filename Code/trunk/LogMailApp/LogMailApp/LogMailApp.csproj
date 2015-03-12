@@ -63,6 +63,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command\AppendLogCommand.cs" />
+    <Compile Include="Command\BackFileCommand.cs" />
     <Compile Include="Command\CommandBase.cs" />
     <Compile Include="Command\DeleteLogCommand.cs" />
     <Compile Include="Command\EditorPanelCommand.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Communication\EmailPoster.cs" />
     <Compile Include="Communication\PosterFactory.cs" />
     <Compile Include="Communication\PosterProduct.cs" />
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\DateTimeToStringConverter.cs" />
     <Compile Include="Converter\DateToShortStringConverter.cs" />
     <Compile Include="Exception\EmailContentNullException.cs" />

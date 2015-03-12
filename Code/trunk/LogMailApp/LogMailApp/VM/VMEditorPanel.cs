@@ -22,6 +22,7 @@ namespace LogMailApp.VM
             this.SaveLogCommand = new SaveLogCommand(userData);
             this.DeleteLogCommand = new DeleteLogCommand(userData);
             this.LoadLogCommand = new LoadLogCommand(userData);
+            this.BackFileCommand = new BackFileCommand(userData);
 
             this.LogDate = DateTime.Now;
             this.LogContent = Resources.WelcomeText;
@@ -31,9 +32,12 @@ namespace LogMailApp.VM
         private string _LogContent;
         private DateTime? _LogDate;
         private DateTime? _SelectedDate;
+        private bool? _IsFiled;
+
         private CommandBase SaveLogCommand = null;
         private CommandBase DeleteLogCommand = null;
         private CommandBase LoadLogCommand = null;
+        private CommandBase BackFileCommand = null;
 
         public string NewButtonText { get; private set; }
 
@@ -67,6 +71,16 @@ namespace LogMailApp.VM
             }
         }
 
+        public bool? IsFiled
+        {
+            get { return _IsFiled; }
+            set
+            {
+                _IsFiled = value;
+                this.OnPropertyChanged("IsFiled");
+            }
+        }
+
         public ICommand Save
         {
             get
@@ -88,6 +102,14 @@ namespace LogMailApp.VM
             get
             {
                 return this.LoadLogCommand;
+            }
+        }
+
+        public ICommand Back
+        {
+            get
+            {
+                return this.BackFileCommand;
             }
         }
     }

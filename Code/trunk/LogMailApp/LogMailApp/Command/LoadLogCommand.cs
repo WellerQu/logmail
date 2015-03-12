@@ -23,6 +23,8 @@ namespace LogMailApp.Command
             {
                 this.ViewModel.LogContent = Resources.WelcomeText;
             }
+
+            this.ViewModel.IsFiled = doc.IsFiled();
         }
     }
 }

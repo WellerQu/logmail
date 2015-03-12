@@ -26,6 +26,18 @@ namespace LogMailApp.Storage
             this.Storager.File();
         }
 
+        public void Back(string name)
+        {
+            this.Storager.PrimaryKey = name;
+
+            this.Storager.Back();
+        }
+
+        public bool IsFiled()
+        {
+            return this.Storager.IsFiled;
+        }
+
         public void Save(string name, string content)
         {
             this.Storager.PrimaryKey = name;
@@ -45,7 +57,7 @@ namespace LogMailApp.Storage
             this.Storager.PrimaryKey = name;
             this.Storager.Load();
 
-            return this.Storager.Content;
+            return this.Storager.Content ?? string.Empty;
         }
 
         public Doc[] GetUnFileDocument()

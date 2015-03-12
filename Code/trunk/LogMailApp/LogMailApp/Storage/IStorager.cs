@@ -17,9 +17,17 @@ namespace LogMailApp.Storage
         /// </summary>
         string Content { get; set; }
         /// <summary>
-        /// 归档
+        /// 是否已归档
+        /// </summary>
+        bool IsFiled { get; set; }
+        /// <summary>
+        /// 归档: 归档后的日志不会再被发送
         /// </summary>
         void File();
+        /// <summary>
+        /// 回档: 回档后的日志可再次发送
+        /// </summary>
+        void Back();
         /// <summary>
         /// 决定未归档的日志如何处理
         /// action将得到name文件名和content内容

@@ -297,6 +297,7 @@ namespace LogMailApp
             this.lastContent = (sender as TextBox).Text;
 
             this.ShowButton(this.btnSave, this.durationGlobal);
+            this.ShowButton(this.btnBack, this.durationGlobal);
             this.HideButton(this.btnDelete, this.durationGlobal);
         }
 
@@ -306,6 +307,7 @@ namespace LogMailApp
 
             this.ShowButton(this.btnDelete, this.durationGlobal);
             this.HideButton(this.btnSave, this.durationGlobal);
+            this.HideButton(this.btnBack, this.durationGlobal);
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -357,6 +359,23 @@ namespace LogMailApp
         private void btnSave_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.SaveData(true);
+        }
+
+        private void btnBack_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            VM.VMMainWindow mainWindow = this.DataContext as VM.VMMainWindow;
+            try
+            {
+                if (mainWindow.NewPanelDataContext.Back.CanExecute(null))
+                {
+                    mainWindow.NewPanelDataContext.Back.Execute(null);
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Window win = new WarningWindow(ex.Message);
+                win.ShowDialog();
+            }
         }
 
         #region 控制空间显示/隐藏的方法, 附带动画效果

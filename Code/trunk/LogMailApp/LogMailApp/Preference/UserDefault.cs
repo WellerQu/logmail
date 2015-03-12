@@ -193,7 +193,8 @@ namespace LogMailApp.Preference
         {
             get
             {
-                return this.PreferenceDoc.SelectSingleNode(SUBJECT_NODE_PATH).InnerText;
+                string subject = this.PreferenceDoc.SelectSingleNode(SUBJECT_NODE_PATH).InnerText;
+                return subject.Replace("{date}", DateTime.Now.ToString("yyyy-MM-dd"));
             }
             set
             {

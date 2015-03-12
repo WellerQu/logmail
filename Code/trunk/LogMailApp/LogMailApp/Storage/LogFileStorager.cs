@@ -12,14 +12,17 @@ namespace LogMailApp.Storage
     {
         public LogFileStorager()
         {
+            bool isFiled = true;
             string currentDayLogKey = DateTime.Now.ToString("yyyy-MM-dd");
 
-            FileInfo file = this.Parse(currentDayLogKey);
+            FileInfo file = this.Parse(currentDayLogKey, ref isFiled);
             if (!file.Exists)
             {
                 using (FileStream fs = file.Create())
                 {
                     fs.Close();
+
+                    this.IsFiled = isFiled;
                 }
             }
         }
@@ -30,6 +33,8 @@ namespace LogMailApp.Storage
         public string PrimaryKey { get; set; } // 示例: 2015-01-13
 
         public string Content { get; set; }
+
+        public bool IsFiled { get; set; }
 
         public void File()
         {
@@ -77,6 +82,22 @@ namespace LogMailApp.Storage
             }
         }
 
+        public void Back()
+        {
+            string fileName = this.PrimaryKey;
+
+            bool isFiled = true;
+            FileInfo file = this.Parse(fileName, ref isFiled);
+
+            if (file != null)
+            {
+                string dir = file.Directory.Parent.Parent.Parent.FullName;
+                file.MoveTo(Path.Combine(dir, fileName + FILE_EXTEND));
+            }
+
+            this.IsFiled = false;
+        }
+
         public void UnFile(Action<string, string> action)
         {
             string[] files = Directory.GetFiles(UserDefault.Instance.StartupPath, "*.lma", SearchOption.TopDirectoryOnly);
@@ -102,21 +123,30 @@ namespace LogMailApp.Storage
 
         public void Load()
         {
-            FileInfo file = this.Parse(this.PrimaryKey);
+            bool isFiled = true;
+            FileInfo file = this.Parse(this.PrimaryKey, ref isFiled);
             if (file.Exists)
+            {
+                this.IsFiled = isFiled;
                 this.Content = System.IO.File.ReadAllText(file.FullName, Encoding.UTF8);
+            }
         }
 
         public void Delete()
         {
-            FileInfo file = this.Parse(this.PrimaryKey);
+            bool isFiled = true;
+            FileInfo file = this.Parse(this.PrimaryKey, ref isFiled);
             if (file.Exists)
+            {
+                this.IsFiled = isFiled;
                 file.Delete();
+            }
         }
 
         public void Save()
         {
-            FileInfo file = this.Parse(this.PrimaryKey);
+            bool isFiled = true;
+            FileInfo file = this.Parse(this.PrimaryKey, ref isFiled);
             FileStream fs = null;
 
             try
@@ -129,6 +159,8 @@ namespace LogMailApp.Storage
                         fs.Write(buffer, 0, buffer.Length);
                         fs.Flush();
                     }
+
+                    this.IsFiled = IsFiled;
                 }
             }
             catch (System.Exception ex)
@@ -139,7 +171,7 @@ namespace LogMailApp.Storage
 
         #endregion
 
-        private FileInfo Parse(string fileName)
+        private FileInfo Parse(string fileName, ref bool isFiled)
         {
             string fileRootDirPath = Path.Combine(
                    UserDefault.Instance.StartupPath,
@@ -159,12 +191,16 @@ namespace LogMailApp.Storage
 
             FileInfo file = new FileInfo(filePath + FILE_EXTEND);
 
+            isFiled = true;
+
             if (!file.Exists)
             {
                 // 未发现归档日志, 尝试当作未归档的日志解析
                 fileRootDirPath = Path.Combine(UserDefault.Instance.StartupPath, fileName);
                 // 获得完整日志文件地址, 示例: ./MyLogs/yyyy-MM-dd
                 file = new FileInfo(fileRootDirPath + FILE_EXTEND);
+
+                isFiled = false;
             }
 
             return file;
